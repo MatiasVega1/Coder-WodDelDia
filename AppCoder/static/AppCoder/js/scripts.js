@@ -57,3 +57,17 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+
+function showPopup() {
+    var popup = document.createElement("div");
+    popup.innerHTML = "Contenido del pop-up";
+    popup.style.backgroundColor = "white";
+    popup.style.padding = "20px";
+    popup.style.position = "fixed";
+    popup.style.top = "50%";
+    popup.style.left = "50%";
+    popup.style.transform = "translate(-50%, -50%)";
+    popup.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+    document.body.appendChild(popup);
+  }

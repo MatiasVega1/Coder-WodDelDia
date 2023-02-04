@@ -1,26 +1,14 @@
 from django import forms
+from .models import *
 
-from .models import Task
-from .models import ValueList
-from .models import ValorSeleccionable
-
-from .models import Dificultad
-from .models import FormularioPrincipal, Formulario, Movimiento, Wod, Score, Atleta
-
+# Acá utilizo Form porque me interesa hacerlo tal cual se realizó en clases
 class AtletaFormulario(forms.Form):
     nombre= forms.CharField()
     apellido= forms.CharField()
     edad = forms.IntegerField()
     email = forms.EmailField()
 
-
-class FormularioForm(forms.ModelForm):
-    class Meta:
-        model = Dificultad
-        fields = ['difficulty']
-
-
-
+# En estos casos, encontré más facilidad para crear los formularios a través de ModelForm
 class WodFormulario(forms.ModelForm):
     class Meta:
         model = Wod
@@ -35,29 +23,4 @@ class MovimientoFormulario(forms.ModelForm):
 class ScoreFormulario(forms.ModelForm):
     class Meta:
         model = Score
-        fields = ['fecha', 'score']
-    wods = forms.ModelChoiceField(queryset=Wod.objects.all())
-    atletas = forms.ModelChoiceField(queryset=Atleta.objects.all())
-
-
-class TaskForm(forms.ModelForm):
-     class Meta:
-        model = Task
-        fields = ['name', 'status']
-
-        
-class ValueListForm(forms.ModelForm):
-    list = ('a','b')
-  #  valor_seleccionable = forms.ModelChoiceField(queryset= list.all(), empty_label=None)
-    dificultad = forms.CharField()
-
-
-class FormularioPrincipalForm(forms.ModelForm):
-    class Meta:
-        model = FormularioPrincipal
-        fields = ['nombre','descripcion', 'difficulty']
-
-class FormularioForm(forms.ModelForm):
-    class Meta:
-        model = Formulario
-        fields = ['difficulty']
+        fields = ['fecha', 'score','wod','atleta'] 

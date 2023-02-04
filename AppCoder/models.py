@@ -1,8 +1,24 @@
 from django.db import models
 
+# Creación de diccionarios para dificultad y para tipos de wod
+# Podrían ser objetos pero a priori me interesaba probar con listas de valores predefinidos
+# En versiones futuras pasarán probablemente a ser objetos
 
+VARIABLES = [
+        ('facil', 'Facil'),
+        ('normal', 'Normal'),
+        ('dificil', 'Dificil'),
+    ]
+
+TIPOS = [
+        ('TABATA', 'TABATA'),
+        ('EMOM', 'EMOM'),
+        ('FOR TIME', 'FOR TIME'),
+        ('AMRAP', 'AMRAP'),
+    ]
 
 class Atleta(models.Model):
+    # Un atleta es aquel que realiza nuestras rutinas
     nombre= models.CharField(max_length=30)
     apellido= models.CharField(max_length=30) 
     edad = models.IntegerField()
@@ -12,15 +28,11 @@ class Atleta(models.Model):
         return self.apellido + ', ' + self.nombre
 
 class Movimiento(models.Model):
+    # Los movimientos son los que conforman el wod
     nombre= models.CharField(max_length=30)
     descripcion= models.CharField(max_length=200)
 
-    VARIABLES = [
-        ('facil', 'Facil'),
-        ('normal', 'Normal'),
-        ('dificil', 'Dificil'),
-    ]
- 
+    # Encontre esta manera de hacer un campo de selección 
     dificultad = models.CharField(
         max_length=10,
         choices= VARIABLES,
@@ -30,99 +42,34 @@ class Movimiento(models.Model):
     def __str__(self):
         return self.nombre.upper() + ": " + self.descripcion
 
-# Create your models here.
-class Wod(models.Model):
-    nombre = models.CharField(max_length=40)
+    # Hago el método getNombre para que, en caso que lo necesite, pueda solo mostrar el movimiento sin su explicacion
+    def getNombre(self):
+        return self.nombre
 
-    TIPOS = [
-        ('TABATA', 'TABATA'),
-        ('EMOM', 'EMOM'),
-        ('FOR TIME', 'FOR TIME'),
-        ('AMRAP', 'AMRAP'),
-    ]
+class Wod(models.Model):
+    # Un wod es la rutina que debe ejecutar nuestro atleta, está conformada de movimientos
+    nombre = models.CharField(max_length=40)
  
     tipo = models.CharField(
         max_length=10,
         choices= TIPOS,
         default='TABATA',
     ) 
+
     duracion = models.IntegerField()
     movimientos = models.ForeignKey(Movimiento, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre.upper() + " (" + self.tipo + " " + str(self.duracion) + " min)"
 
-
-class Task(models.Model):
-    name = models.CharField(max_length=200)
-    status = models.CharField(max_length=10)
-
-
-class ValueList(models.Model):
-    name = models.CharField(max_length=100)
-    value = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"{self.name}: {self.value}"
-
-
-class ValorSeleccionable(models.Model):
-    nombre = models.CharField(max_length=100)
-    valor = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"{self.nombre}: {self.valor}"
-
-
-class Dificultad(models.Model):
-    DIFICULTAD_VARIABLES = [
-        ('facil', 'Facil'),
-        ('normal', 'Normal'),
-        ('dificil', 'Dificil'),
-    ]
-
-    difficulty = models.CharField(
-        max_length=10,
-        choices= DIFICULTAD_VARIABLES,
-        default='normal',
-    )
-
-
-class FormularioPrincipal(models.Model):
-    nombre= models.CharField(max_length=30)
-    descripcion= models.CharField(max_length=200)
-
-    VARIABLES = [
-        ('facil', 'Facil'),
-        ('normal', 'Normal'),
-        ('dificil', 'Dificil'),
-    ]
-
-    difficulty = models.CharField(
-        max_length=10,
-        choices= VARIABLES,
-        default='normal',
-    )
-
-
-class Formulario(models.Model):
-    VARIABLES = [
-        ('facil', 'Facil'),
-        ('normal', 'Normal'),
-        ('dificil', 'Dificil'),
-    ]
-
-    difficulty = models.CharField(
-        max_length=10,
-        choices= VARIABLES,
-        default='normal',
-    )
-
 class Score(models.Model):
+    # El Score es el resultado que obtuvo el atleta a la hora de realizar el wod
     fecha = models.DateField()
+    
+    # Tengo que crear una FK a Wod y a Atleta ya que está relacionado a ambos
     wod = models.ForeignKey(Wod, on_delete=models.CASCADE)
     atleta = models.ForeignKey(Atleta, on_delete=models.CASCADE)
     score = models.IntegerField()
 
-    def __str__(self):
-        return self.atleta  + " hizo el wod " + self.wod + " en " + self.score + "(" + self.fecha +  ")"
+    def __str__(self): 
+        return  self.atleta.__str__() + " hizo el wod " + self.wod.__str__()  + " obeteniendo " + str(self.score) + " puntos (" + str(self.fecha)  +  ")"

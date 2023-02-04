@@ -1,0 +1,19 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Bienvenido{% endblock %}
+
+{% block botonera %}
+Querés cargar tus scores? <a  href="{% url 'Crear Score' %}"> Podés hacerlo acá!</a> 
+{% endblock %}
+
+{% block formulario %}
+
+Estos son los últimos scores cargados que se cargaron:
+<br>
+{% for x in listaScores %}
+    {{x}} 
+    <br> 
+{% endfor %}
+
+{% endblock %}

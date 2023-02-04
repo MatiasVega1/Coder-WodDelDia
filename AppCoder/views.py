@@ -1,19 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from AppCoder.models import *
-from AppCoder.forms import *
- 
-from .models import Task
-from .forms import ValueListForm
-from .models import ValueList
-from .forms import FormularioPrincipalForm, FormularioForm
+from AppCoder.forms import * 
 
 # Paginas de Inicio
 def inicio(request):
     return render(request, "AppCoder/inicio.html")
 
 # ABM de Atletas
-def verAtletas(request):
+def verAtletas(request): # Listado principal, ve todos los atletas
     listaAtletas = Atleta.objects.all() 
     return render(request, "AppCoder/listaAtletas.html", {"listaAtletas": listaAtletas})
 
@@ -40,9 +35,6 @@ def crearAtletas(request):
 
     return render(request, "AppCoder/crearAtletas.html", {"formulario1":miFormulario})
 
-def buscarAtleta(request):
-    return render(request, "AppCoder/buscarAtleta.html")
-
 def verAtleta(request):
     if request.GET["apellido"]:
 
@@ -58,7 +50,7 @@ def verAtleta(request):
 
 
 # ABM de Wods
-def verWods(request):
+def verWods(request): # Listado principal, ve todos los wods
     listaWods = Wod.objects.all() 
     return render(request, "AppCoder/listaWods.html", {"listaWods": listaWods})
 
@@ -83,10 +75,7 @@ def crearWods(request):
     else:
         miFormulario = WodFormulario()
 
-    return render(request, "AppCoder/crearWods.html", {"formulario1":miFormulario})
-
-def buscarWod(request):
-    return render(request, "AppCoder/buscarWod.html")
+    return render(request, "AppCoder/crearWods.html", {"formulario1":miFormulario}) 
 
 def verWod(request):
     if request.GET["tipo"]:
@@ -94,23 +83,15 @@ def verWod(request):
         tipo = request.GET['tipo'] 
         
         wod1 = Wod.objects.filter(tipo__icontains= tipo)
-        return render(request, "AppCoder/verAtleta.html", { "wod": wod1, 
+        return render(request, "AppCoder/verWod.html", { "wod": wod1, 
                                                             "tipo": tipo})
     else:
         respuesta = "No enviaste datos"
     
-    return HttpResponse(respuesta)
-
-
-def task_list(request):
-    tasks = Task.objects.all()
-    return render(request, 'AppCoder/task_list.html', {'tasks': tasks})
-
-
-
+    return HttpResponse(respuesta) 
 
 # ABM de Movimientos
-def verMovimientos(request):
+def verMovimientos(request): # Listado principal, ve todos los movimientos
     listaMovimientos = Movimiento.objects.all() 
     return render(request, "AppCoder/listaMovimientos.html", {"listaMovimientos": listaMovimientos})
 
@@ -136,23 +117,24 @@ def crearMovimientos(request):
 
     return render(request, "AppCoder/crearMovimientos.html", {"formulario1":miFormulario})
 
-def buscarMovimiento(request):
-    return render(request, "AppCoder/buscarMovimiento.html")
+def verMovimiento(request): # Listado principal, ve todos los atletas
+    if request.GET["dificultad"]:
 
-def verMovimiento(request):
-    if request.GET["tipo"]:
-
-        tipo = request.GET['tipo'] 
+        dificultad = request.GET['dificultad'] 
         
-        mov1 = Movimiento.objects.filter(tipo__icontains= tipo)
+        mov1 = Movimiento.objects.filter(dificultad__icontains= dificultad)
         return render(request, "AppCoder/verMovimiento.html", { "movimiento": mov1, 
-                                                            "tipo": tipo})
+                                                                "dificultad": dificultad})
     else:
         respuesta = "No enviaste datos"
     
     return HttpResponse(respuesta)
 
 
+# ABM de Movimientos
+def verScore(request): # Listado principal, ve todos los scores
+    listaScores = Score.objects.all() 
+    return render(request, "AppCoder/listaScores.html", {"listaScores": listaScores})
 
 def crearScore(request):
     if request.method == 'POST':
@@ -162,60 +144,28 @@ def crearScore(request):
         if miFormulario.is_valid():
             infoDic = miFormulario.cleaned_data # La info formulario pasa a diccionario
 
+            wod1 = Wod()
+
+            print(infoDic)
+
             sco1 = Score(   fecha = infoDic["fecha"],  
-                            score = infoDic["score"])
+                            score = infoDic["score"],  
+                            wod = infoDic["wod"],  
+                            atleta = infoDic["atleta"], )
 
    
             sco1.save() 
             
-            listaWods = Wod.objects.all() 
-            listaAtletas = Wod.objects.all() 
+            #listaWods = Wod.objects.all() 
+            #listaAtletas = Wod.objects.all() 
 
-            return render(request, "AppCoder/listaMovimientos.html", 
-                {"listaWods": listaWods}, 
-                {"listaAtletas": listaAtletas})
+            return render(request, "AppCoder/listaScores.html", 
+                #{"listaWods": listaWods}, 
+                #{"listaAtletas": listaAtletas}
+                )
     else:
         miFormulario = ScoreFormulario()
 
     return render(request, "AppCoder/crearScore.html", {"formulario1":miFormulario})
 
-
-
-
-
-def value_list_view(request):
-    #value_lists = ValueList.objects.all()
-    
-    if request.method == "POST":
-        print("Aca")
-        form = ValueListForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("value_list")
-    else:
-        form = ValueListForm()
-    return render(request, "AppCoder/value_list.html", {"form": form})
-
-
-
-def formulario_view(request):
-    if request.method == 'POST':
-        form = FormularioForm(request.POST)
-        if form.is_valid():
-            form.save()
-            # Aquí puedes agregar la lógica adicional para procesar el formulario
-    else:
-        form = FormularioForm()
-    return render(request, 'AppCoder/value_list.html', {'form': form})
-
-
-def formulario_principal_view(request):
-    formulario_form = FormularioForm()
-    if request.method == 'POST':
-        form = FormularioPrincipalForm(request.POST)
-        if form.is_valid():
-            form.save()
-            # Aquí puedes agregar la lógica adicional para procesar el formulario
-    else:
-        form = FormularioPrincipalForm()
-    return render(request, 'AppCoder/formulario_principal.html', {'form': form, 'formulario_form': formulario_form})
+ 

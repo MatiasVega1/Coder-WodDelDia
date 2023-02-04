@@ -57,3 +57,11 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+
+$(document).ready(function() {
+    // Mostrar el modal cuando se haga clic en el botón
+    $('#exampleModal').on('shown.bs.modal', function () {
+      $('#myInput').focus()
+    })
+  });

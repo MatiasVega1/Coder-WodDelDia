@@ -1,15 +1,27 @@
-{% extends "AppCoder/padre.html" %}
+{% extends "AppCoder/listaMovimientos.html" %}
 
-{% block titulo %}
-Estamos buscando a la persona {{apellido}}
-
-{% endblock %}
+{% block formulario %}    
 
 
-{% block formulario %}                            
+<form href="{% url 'Filtrar Movimiento' %}" method="GET"> 
+    <label>Dificultad: </label>
+    <select name="dificultad" id="dificultad">  
+        <option value="">Dificultad</option>
+        <option value="Facil">Facil</option>
+        <option value="Medio">Medio</option>
+        <option value="Dificil">Dificil</option> 
+    </select>
+    
+    <input class="btn btn-primary btn-xl" type="submit" value="Buscar"> 
+    
+    <a class="btn btn-secondary btn-xl"  href="{% url 'Ver Movimientos' %}">Limpiar</a> 
+</form>
+
+Los movimientos con dificultad {{dificultad}} son: <br>                        
                             
-{% for x in estudiante %}
-    Apellido: {{x.apellido}} 
+{% for x in movimiento %}
+    {{x}}
+    <br> 
 {% endfor %}
 
 {%endblock%}

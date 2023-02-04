@@ -1,16 +1,30 @@
 {% extends "AppCoder/padre.html" %}
 
 {% block titulo %}
-Listado de Movimientos
-{% endblock %}
-
-{% block botonera %}
+Movimientos
 <a class="btn btn-primary btn-xl"  href="{% url 'Crear Movimientos' %}">Crear</a> 
 {% endblock %}
 
+{% block botonera %}
+{% endblock %}
+
 {% block formulario %}
+
+<form action="/AppCoder/verMovimiento/" method="GET"> 
+    <label>Dificultad: </label>
+    <select name="dificultad" id="dificultad">  
+        <option value="">Dificultad</option>
+        <option value="Facil">Facil</option>
+        <option value="Medio">Medio</option>
+        <option value="Dificil">Dificil</option> 
+    </select>
+    
+    <input class="btn btn-primary btn-xl" type="submit" value="Buscar"> 
+</form>
+
 {% for x in listaMovimientos %}
     {{x}} 
+    <br>
 {% endfor %}
 
 {% endblock %}

@@ -2,18 +2,20 @@
 
 {% block titulo %}
 Listado de Atletas
+<a class="btn btn-primary btn-xl"  href="{% url 'Crear Atletas' %}">Registrarse</a> 
 {% endblock %}
 
-{% block botonera %}
-<a class="btn btn-primary btn-xl"  href="{% url 'Crear Atletas' %}">Registrarse</a> 
-<br>
-Sos un atleta y querés cargar tus resultados? <a  href="{% url 'Crear Score' %}"> Carga tu Score acá!</a>
-{% endblock %}
 
 {% block formulario %}
+<form action="/AppCoder/verAtleta/" method="GET">
+    <input type="text" name = "apellido">
+    <input class="btn btn-primary btn-xl" type="submit" value="Buscar"> 
+</form>
+
 Estos son nuestros últimos atletas registrados: <br>
 {% for x in listaAtletas %}
-    {{x}} 
+    {{x}}
+    <br> 
 {% endfor %}
 
 {% endblock %}

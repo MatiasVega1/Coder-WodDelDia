@@ -1,15 +1,19 @@
-{% extends "AppCoder/padre.html" %}
+{% extends "AppCoder/listaAtletas.html" %}
 
-{% block titulo %}
-Estamos buscando a la persona {{apellido}}
+{% block formulario %}    
+<form href="{% url 'Filtrar Atleta' %}" method="GET">
+    <input type="text" name = "apellido">
 
-{% endblock %}
+    <input class="btn btn-primary btn-xl" type="submit" value="Buscar">
+    
+    <a class="btn btn-secondary btn-xl"  href="{% url 'Ver Atletas' %}">Limpiar</a> 
+</form>
 
-
-{% block formulario %}                            
+Los atletas con apellido {{apellido}} son: <br>                        
                             
-{% for x in estudiante %}
-    Apellido: {{x.apellido}} 
+{% for x in atleta %}
+    {{x}}
+    <br> 
 {% endfor %}
 
 {%endblock%}

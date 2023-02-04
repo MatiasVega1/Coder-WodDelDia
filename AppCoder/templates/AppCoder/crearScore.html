@@ -6,10 +6,8 @@ Registro de Wods
 
 {% block formulario %}
 <form action="" method="POST"> {% csrf_token %}
-
     {{formulario1.as_p}}
-    
-    <input type="btn btn-primary btn-xl" value="Enviar">
+    <input class="btn btn-primary btn-xl" type="Submit" value="Enviar">  
 </form>
 {% endblock %}
 

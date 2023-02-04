@@ -2,18 +2,35 @@
 
 {% block titulo %}
 Listado de Wods
+
+<a class="btn btn-primary btn-xl"  href="{% url 'Crear Wod' %}">Crear</a> 
 {% endblock %}
 
 {% block botonera %}
 Encontrá los wods más divertidos para realizar
 <br>desafiate a vos y a tus amigos! 
 <br>
-<a class="btn btn-primary btn-xl"  href="{% url 'Crear Wod' %}">Crear Wod</a> 
-<a class="btn btn-primary btn-xl"  href="{% url 'Crear Score' %}">Cargar Score</a> 
+<br>
+Querés cargar tus scores? <a  href="{% url 'Crear Score' %}"> Podés hacerlo acá!</a> 
 {% endblock %}
 
-{% block formulario %}
+{% block formulario %} 
 
+<form action="/AppCoder/verWod/" method="GET"> 
+    <label>Tipo: </label>
+    <select name="tipo" id="tipo">  
+        <option value="">Tipo</option>
+        <option value="TABATA">TABATA</option>
+        <option value="EMOM">EMOM</option>
+        <option value="FOR TIME">FOR TIME</option>
+        <option value="AMRAP">AMRAP</option>
+    </select>
+    
+    <input class="btn btn-primary btn-xl" type="submit" value="Buscar"> 
+</form>
+
+
+<br>
 Estos son los últimos wods que se cargaron:
 <br>
 {% for x in listaWods %}
