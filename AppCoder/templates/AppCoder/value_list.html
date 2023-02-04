@@ -1,0 +1,15 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Registro de asdasdsa
+{% endblock %} 
+
+{% block formulario %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
+

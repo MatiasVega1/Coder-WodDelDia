@@ -1,0 +1,20 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Listado de Atletas
+{% endblock %}
+
+{% block botonera %}
+<a class="btn btn-primary btn-xl"  href="{% url 'Crear Atletas' %}">Registrarse</a> 
+<br>
+Sos un atleta y querés cargar tus resultados? <a  href="{% url 'Crear Score' %}"> Carga tu Score acá!</a>
+{% endblock %}
+
+{% block formulario %}
+Estos son nuestros últimos atletas registrados: <br>
+{% for x in listaAtletas %}
+    {{x}} 
+{% endfor %}
+
+{% endblock %}
+

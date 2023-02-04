@@ -1,0 +1,18 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Task List
+{% endblock %} 
+
+{% block formulario %}
+<form action="" method="POST"> {% csrf_token %}
+
+    {{tasks.as_p}}
+    
+    <input type="submit" value="Enviar">
+</form>
+{% endblock %}
+
+
+
+

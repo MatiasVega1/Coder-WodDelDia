@@ -1,0 +1,28 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Registro de Wods
+{% endblock %} 
+
+{% block formulario %}
+<form action="" method="POST"> {% csrf_token %}
+
+    <p>Recordá que los tipos de wods son: 
+        <br>TABATA (20'' de Trabajo por 10'' de descanso)
+        <br>EMOM (máximas repeticiones por minuto)
+        <br>FOR TIME (Completar repeticiones en el menor tiempo posible)
+        <br>AMRAP (Todas las repetciones que se puedan hacer en el tiempo dado)
+
+
+    </p>
+
+    {{formulario1.as_p}}
+    
+    <input type="Submit" value="Enviar"> 
+    <a class="btn btn-primary btn-xl"  href="{% url 'Crear Score' %}">Crear</a> 
+</form>
+{% endblock %}
+
+
+
+

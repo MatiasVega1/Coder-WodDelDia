@@ -1,0 +1,16 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Listado de Movimientos
+{% endblock %}
+
+{% block botonera %}
+<a class="btn btn-primary btn-xl"  href="{% url 'Crear Movimientos' %}">Crear</a> 
+{% endblock %}
+
+{% block formulario %}
+{% for x in listaMovimientos %}
+    {{x}} 
+{% endfor %}
+
+{% endblock %}

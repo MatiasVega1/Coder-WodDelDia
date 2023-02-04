@@ -1,0 +1,18 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Registro de Atletas
+{% endblock %} 
+
+{% block formulario %}
+<form action="" method="POST"> {% csrf_token %}
+
+    {{formulario1.as_p}}
+    
+    <input type="btn btn-primary btn-xl" value="Enviar">
+</form>
+{% endblock %}
+
+
+
+

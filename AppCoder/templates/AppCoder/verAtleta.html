@@ -1,0 +1,15 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Estamos buscando a la persona {{apellido}}
+
+{% endblock %}
+
+
+{% block formulario %}                            
+                            
+{% for x in estudiante %}
+    Apellido: {{x.apellido}} 
+{% endfor %}
+
+{%endblock%}
