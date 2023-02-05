@@ -19,6 +19,7 @@ from ProyectoDjango.views import *
 
 
 urlpatterns = [
+    path('', default),
     path('admin/', admin.site.urls),
     path("main/", miPagina),
     path("AppCoder/", include("AppCoder.urls"))

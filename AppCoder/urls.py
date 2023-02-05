@@ -3,6 +3,7 @@ from AppCoder.views import *
 
 
 urlpatterns = [ 
+    path("", inicio), 
     path("main/", inicio, name = "Start"), 
 
     # Atletas
