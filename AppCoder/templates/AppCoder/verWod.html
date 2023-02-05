@@ -2,7 +2,7 @@
 
 {% block formulario %}    
 <form href="{% url 'Filtrar Wod' %}" method="GET"> 
-    <label>Tipo: </label>
+    <label class="form-text">Tipo: </label>
     <select name="tipo" id="tipo"> 
         <option value="">Tipo</option>
         <option value="TABATA">TABATA</option>
@@ -18,10 +18,10 @@
 
 <br>
 
-Los wods del tipo {{tipo}} son: <br>                        
+<p class="form-text"> Los wods del tipo {{tipo}} son: </p>><br>                        
                             
 {% for x in wod %}
-    {{x}}
+    <p class="form-text">  {{x}} </p>  
     <br> 
 {% endfor %}
 

@@ -61,6 +61,9 @@ class Wod(models.Model):
 
     def __str__(self):
         return self.nombre.upper() + " (" + self.tipo + " " + str(self.duracion) + " min)"
+    
+    def getNombre(self):
+        return self.nombre.upper()
 
 class Score(models.Model):
     # El Score es el resultado que obtuvo el atleta a la hora de realizar el wod

@@ -133,20 +133,20 @@ def verMovimiento(request): # Listado principal, ve todos los atletas
 
 # ABM de Movimientos
 def verScore(request): # Listado principal, ve todos los scores
-    listaScores = Score.objects.all() 
+    # Acá obtengo todos los scores, pero quiero ordenarlos de mayor a menor para mostrar los mejores
+    listaScores = Score.objects.all().order_by("-score") 
+
     return render(request, "AppCoder/listaScores.html", {"listaScores": listaScores})
 
 def crearScore(request):
     if request.method == 'POST':
         
         miFormulario = ScoreFormulario(request.POST)
-
+        
         if miFormulario.is_valid():
             infoDic = miFormulario.cleaned_data # La info formulario pasa a diccionario
 
-            wod1 = Wod()
-
-            print(infoDic)
+            wod1 = Wod() 
 
             sco1 = Score(   fecha = infoDic["fecha"],  
                             score = infoDic["score"],  
@@ -155,14 +155,9 @@ def crearScore(request):
 
    
             sco1.save() 
-            
-            #listaWods = Wod.objects.all() 
-            #listaAtletas = Wod.objects.all() 
+             
 
-            return render(request, "AppCoder/listaScores.html", 
-                #{"listaWods": listaWods}, 
-                #{"listaAtletas": listaAtletas}
-                )
+            return render(request, "AppCoder/listaScores.html")
     else:
         miFormulario = ScoreFormulario()
 

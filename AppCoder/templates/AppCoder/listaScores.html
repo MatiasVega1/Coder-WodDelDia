@@ -1,7 +1,8 @@
 {% extends "AppCoder/padre.html" %}
 
 {% block titulo %}
-Bienvenido{% endblock %}
+&#128075; Bienvenido
+{% endblock %}
 
 {% block botonera %}
 Querés cargar tus scores? <a  href="{% url 'Crear Score' %}"> Podés hacerlo acá!</a> 
@@ -9,10 +10,10 @@ Querés cargar tus scores? <a  href="{% url 'Crear Score' %}"> Podés hacerlo ac
 
 {% block formulario %}
 
-Estos son los últimos scores cargados que se cargaron:
-<br>
+&#128293; Estos son nuestros mejores resultados:
+<br> 
 {% for x in listaScores %}
-    {{x}} 
+    {{ forloop.counter }} {{x.atleta}} {{x.wod.nombre}} {{x.score}} puntos 
     <br> 
 {% endfor %}
 

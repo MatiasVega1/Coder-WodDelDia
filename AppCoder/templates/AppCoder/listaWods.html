@@ -17,7 +17,7 @@ Querés cargar tus scores? <a  href="{% url 'Crear Score' %}"> Podés hacerlo ac
 {% block formulario %} 
 
 <form action="/AppCoder/verWod/" method="GET"> 
-    <label>Tipo: </label>
+    <label class="form-text">Tipo: </label>
     <select name="tipo" id="tipo">  
         <option value="">Tipo</option>
         <option value="TABATA">TABATA</option>
@@ -31,11 +31,10 @@ Querés cargar tus scores? <a  href="{% url 'Crear Score' %}"> Podés hacerlo ac
 
 
 <br>
-Estos son los últimos wods que se cargaron:
+<p class="form-text"> Estos son los últimos wods que se cargaron: </p>
 <br>
 {% for x in listaWods %}
-    {{x}} 
-    <br> 
+   <p class="form-text">  {{x}} </p>  
 {% endfor %}
 
 {% endblock %}

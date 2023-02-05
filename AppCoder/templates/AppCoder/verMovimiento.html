@@ -4,7 +4,7 @@
 
 
 <form href="{% url 'Filtrar Movimiento' %}" method="GET"> 
-    <label>Dificultad: </label>
+    <label class="form-text">Dificultad: </label>
     <select name="dificultad" id="dificultad">  
         <option value="">Dificultad</option>
         <option value="Facil">Facil</option>
@@ -17,10 +17,10 @@
     <a class="btn btn-secondary btn-xl"  href="{% url 'Ver Movimientos' %}">Limpiar</a> 
 </form>
 
-Los movimientos con dificultad {{dificultad}} son: <br>                        
+<p class="form-text"> Los movimientos con dificultad {{dificultad}} son: </p>   <br>                        
                             
 {% for x in movimiento %}
-    {{x}}
+    <p class="form-text">  {{x}} </p>  
     <br> 
 {% endfor %}
 

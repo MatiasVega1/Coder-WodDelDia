@@ -11,7 +11,7 @@ Movimientos
 {% block formulario %}
 
 <form action="/AppCoder/verMovimiento/" method="GET"> 
-    <label>Dificultad: </label>
+    <label class="form-text">Dificultad: </label>
     <select name="dificultad" id="dificultad">  
         <option value="">Dificultad</option>
         <option value="Facil">Facil</option>
@@ -23,7 +23,7 @@ Movimientos
 </form>
 
 {% for x in listaMovimientos %}
-    {{x}} 
+    <p class="form-text">  {{x}} </p>   
     <br>
 {% endfor %}
 
