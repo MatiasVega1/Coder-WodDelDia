@@ -1,0 +1,60 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Registro de Wods
+{% endblock %} 
+
+{% block formulario %}
+
+
+
+<form action="" method="POST"> {% csrf_token %}
+     
+ 
+
+   
+
+    <div class="form-floating mb-3"> 
+        <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.wod.name }}">                
+            <option value="" selected disabled>Seleccione una opción</option>
+            {% for wod in wods %}
+                <option value="{{ wod.pk }}">{{ wod.nombre }}</option>
+            {% endfor %}
+        </select>  
+    </div>
+
+    <div> 
+        <div class="form-floating mb-3">
+            <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.score.name }}"/>  
+            <label for="name">Score del Wod</label>
+            <div class="invalid-feedback" data-sb-feedback="name:required">El nombre del wod es obligatorio</div>
+        </div>
+        
+    </div>
+
+
+    <div> 
+        <div class="form-floating mb-3">
+            <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.fecha.name }}"/>  
+            <label for="name">Fecha del Wod</label>
+            <div class="invalid-feedback" data-sb-feedback="name:required">El nombre del wod es obligatorio</div>
+        </div>
+        
+    </div>
+    
+    <div class="form-floating mb-3"> 
+        <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.atleta.name }}">                
+            <option value="" selected disabled>Seleccione una opción</option>
+            {% for option in formulario1.atleta.field.choices %}
+                <option value="{{ option.0 }}">{{ option.1 }}</option>
+            {% endfor %}
+        </select>  
+    </div> 
+
+    <input class="btn btn-primary btn-xl" type="Submit" value="Enviar">  
+</form>
+{% endblock %}
+
+
+
+

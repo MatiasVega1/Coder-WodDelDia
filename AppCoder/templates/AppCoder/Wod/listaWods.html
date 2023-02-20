@@ -1,0 +1,68 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Listado de Wods
+
+{% if request.user.is_authenticated %}
+<a class="btn btn-primary btn-xl"  href="{% url 'Crear Wod' %}">Crear</a> 
+{% endif %}
+{% endblock %}
+
+{% block botonera %}
+<div> 
+  <form action="/AppCoder/filtrarWod/" method="GET"> 
+      <label class="form-text">Tipo: </label>
+      <select name="tipo" id="tipo">  
+          <option value="">Tipo</option>
+          <option value="TABATA">TABATA</option>
+          <option value="EMOM">EMOM</option>
+          <option value="FOR TIME">FOR TIME</option>
+          <option value="AMRAP">AMRAP</option>
+      </select>
+      
+      <input class="btn btn-secondary btn-xl" type="submit" value="Buscar"> 
+  </form>
+  </div>
+
+{% endblock %}
+
+{% block formulario %} 
+
+
+
+<br>
+<p class="form-text"> Estos son los wods que se cargaron: </p> 
+<table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Duración</th>
+        <th> </th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in listaWods %}
+        <tr>
+          <td>
+          <a  href="{% url 'Filtrar Wod' x.nombre %}"  > {{ x.nombre }} </a> </td>
+          <td>{{ x.tipo }}</td>
+          <td>{{ x.duracion }}</td>
+          <td> 
+            {% if request.user.is_authenticated %}
+            <a class="btn btn-outline-light btn-xl" href="{% url 'Editar Wod' x.nombre %}"  > &#128397  </a> 
+            <a  class="btn btn-outline-light btn-xl" href="{% url 'Borrar Wod' x.nombre %}"  > &#10060 </a> 
+            {% endif %}
+            </td>
+          <td> 
+            <a class="btn btn-primary btn-xl" href="{% url 'Score del Dia' x.nombre %}"  > Cargar Score </a> 
+            <a  class="btn btn-primary btn-xl" href="{% url 'Dejar Comentario'  x.nombre %}"  > Comentar </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}

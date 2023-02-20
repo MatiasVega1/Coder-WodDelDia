@@ -1,0 +1,81 @@
+{% extends "AppCoder/padre.html" %} 
+
+{% block formulario %}
+ 
+<!-- Pricing section-->
+
+
+<div class="container px-5 my-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bolder">{% if request.user.is_autenticated %}
+            &#128075; Bienvenido
+            {% else %}
+            &#128075; Bienvenido {{ request.user }}
+            {% endif %}</h1>
+    </div>
+    <div class="row justify-content-center"> 
+            
+            <div class="col-lg-6 col-xl-6">
+                <div class="card mb-5 mb-xl-0">
+                    <div class="card-body p-50">
+                        <div class="small text-uppercase fw-bold text-muted">Wod del día</div>
+                        <div class="mb-3">
+                            <span class="display-4 fw-bold">  {{wodDelDia.nombre}}  </span> 
+                        </div>  
+                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{wodDelDia.tipo.upper}}</div> 
+                        
+                        {{ wodDelDia.duracion}} minutos
+                        {% if wodDelDia.rondas == "Sin Rondas" %} 
+                        ( {{ wodDelDia.rondas}} )
+                        {% else %}
+                        ( {{ wodDelDia.rondas}} rondas)
+                        {% endif %}
+                        <br>
+                        <p> {{ wodDelDia.cantidad1}}
+                            {{ wodDelDia.movimiento1.nombre}}
+                            <br>
+                        {{ wodDelDia.cantidad2}}
+                        {{ wodDelDia.movimiento2.nombre}}
+                        <br>
+                        {{ wodDelDia.cantidad3}}
+                        {{ wodDelDia.movimiento3.nombre}}
+                        <br>
+                        {{ wodDelDia.cantidad4}}
+                        {{ wodDelDia.movimiento4.nombre}}
+                        <br>
+                        {{ wodDelDia.cantidad5}}
+                        {{ wodDelDia.movimiento5.nombre}} 
+                        <br></p> 
+                        <br>
+                        <div class="d-grid"><a class="btn btn-outline-primary"  href="{% url 'Filtrar Wod' wodDelDia.nombre %}" > Ver Wod </a></div> 
+                        <br>
+                        <div class="d-grid"><a class="btn btn-primary"  href="{% url 'Score del Dia' wodDelDia.nombre %}" >Cargar Score</a></div> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-6">
+                <div class="card mb-5 mb-xl-0">
+                    <div class="card-body p-50">
+                        <div class="small text-uppercase fw-bold text-muted">Los mejores resultados del día</div>
+                        {% if listaScores%}
+                        <div class="mb-3">
+                            <span class="display-4 fw-bold">Top Atletas</span> 
+                        </div>
+                        {% for x,y in listaScores %}
+                            {{ forloop.counter }} {{x}} {{y}} {{z}} puntos 
+                            <br> 
+                        {% endfor %}
+                        {% else %}
+                        Aún no hay resultados cargados! A entrenar y cargar tus resultados!
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+</div> 
+
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "AppCoder/padre.html" %}
+
+
+
+{% block titulo %}
+Listado de Atletas
+{% if request.user.is_authenticated %}
+<a class="btn btn-primary btn-xl"  href="{% url 'Crear Atletas' %}">Registrarse</a> 
+{% endif %}
+{% endblock %}
+
+
+{% block formulario %}
+<p class="form-text">  Estos son nuestros últimos atletas registrados:  </p>   <br>
+<div class="row gx-5 row-cols-1 row-cols-sm-2 row-cols-xl-4 justify-content-center">
+    {% for atleta in ultimosAtletas %}
+        <div class="col mb-5 mb-5 mb-xl-0">
+            <div class="text-center">
+                <img class="img-fluid rounded-circle mb-4 px-4"   src="{{ atleta.avatar.imagen.url }}" alt="..." />
+                <h5 class="fw-bolder">{{ atleta }}</h5>
+
+                <div class="fst-italic text-muted"> {{atleta.nacionalidad}} -  {{ atleta.box.nombre }} </div> 
+
+            </div>
+        </div>
+    {% endfor %} 
+</div> 
+<br><br>
+<p class="form-text"> Estos son todos los atletas que nos están utilizando: </p> 
+<table class="table">
+    <thead>
+      <tr>
+        <th> </th>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Email</th> 
+        <th>Box</th> 
+        <th>Nacionalidad</th> 
+        <th>Puntaje</th> 
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in listaAtletas %}
+        <tr>
+            <td> <img class="rounded-circle mb-4 px-4" style="max-width: 100px;"  src="{{ x.avatar.imagen.url }}" alt="..." /> </td>
+            <td> {{ x }} </td>
+            <td>{{ x.edad }}</td>
+            <td>{{ x.email }}</td> 
+            <td>{{ x.box.nombre }}</td> 
+            <td>{{ x.nacionalidad }}</td> 
+            <td>{{ x.getNombre }}</td> 
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
+

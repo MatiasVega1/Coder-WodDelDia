@@ -1,0 +1,69 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Registro de Atletas
+{% endblock %} 
+
+{% block formulario %}
+<form action="" method="POST"> {% csrf_token %}
+    
+    <div class="row" > 
+        <div class="col-lg-6 col-xl-6">
+            <div class="form-floating mb-3">
+                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.nombre.name }}"/>  
+                <label for="name">Nombre del Atleta</label>
+                <div class="invalid-feedback" data-sb-feedback="name:required">El nombre del wod es obligatorio</div>
+            </div> 
+        </div> 
+
+        <div class="col-lg-6 col-xl-6">
+            <div class="form-floating mb-3">
+                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.apellido.name }}"/>  
+                <label for="name">Apellido del Atleta</label>
+                <div class="invalid-feedback" data-sb-feedback="name:required">El nombre del wod es obligatorio</div>
+            </div> 
+        </div>
+    </div>
+
+    <div> 
+        <div class="form-floating mb-3">
+            <input class="form-control" id="name" type="number" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.edad.name }}"/>  
+            <label for="name">Edad del Atleta</label>
+            <div class="invalid-feedback" data-sb-feedback="name:required">El nombre del wod es obligatorio</div>
+        </div> 
+    </div>
+
+    
+    <div> 
+        <div class="form-floating mb-3">
+            <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.email.name }}"/>  
+            <label for="name">Email  del Atleta</label>
+            <div class="invalid-feedback" data-sb-feedback="name:required">El nombre del wod es obligatorio</div>
+        </div> 
+    </div>
+
+    <div class="form-floating mb-3"> 
+        <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.box.name }}">                
+            <option value="" selected disabled>Seleccione una opción</option>
+            {% for option in boxes %}
+                <option value="{{ option.id }}"> {{ option.nombre }}</option>
+            {% endfor %}
+        </select>  
+    </div>
+
+    <div class="form-floating mb-3"> 
+        <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.nacionalidad.name }}">                
+            <option value="" selected disabled>Seleccione una opción</option>
+            {% for option in nacionalidades   %}
+                <option value="{{ option.0 }}">{{ option.1 }}</option>
+            {% endfor %}
+        </select>  
+    </div>
+ 
+    <input class="btn btn-primary btn-xl" type="Submit" value="Enviar">  
+</form>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,32 @@
+{% extends "AppCoder/padre.html" %}
+ 
+
+{% load static %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+{% block titulo %}
+Registro de Wods 
+
+{% endblock %} 
+
+{% block formulario %}
+<form action="" method="POST"> {% csrf_token %}
+      
+    <label for="{{ formulario1.wod.id_for_label }}">Wod:</label>
+    <select name="{{ formulario1.wod.name }}" id="{{ form.wod.id_for_label }}">
+        {% for wod in wods %}
+            <option value="{{ wod.pk }}">{{ wod.nombre }}</option>
+        {% endfor %}
+    </select>
+    
+    
+    {{form.as_p}}
+    <input class="btn btn-primary btn-xl" type="Submit" value="Enviar">  
+</form> 
+{% endblock %}
+
+
+
+

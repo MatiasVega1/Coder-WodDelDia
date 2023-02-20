@@ -1,0 +1,19 @@
+{% extends "AppCoder/padre.html" %}
+
+
+{% block titulo %}
+Borrando
+{% endblock %}
+
+
+{% block formulario %}
+
+<form action="" method = "POST">
+    {% csrf_token %}
+
+    Seguro borrar a {{object.nombre}}?
+    
+    <input type="submit" value = "Enviar">
+</form>
+
+{% endblock %}

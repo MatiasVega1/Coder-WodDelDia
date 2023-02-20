@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Creative - Start Bootstrap Theme</title>
+        <title>  Wod del dia </title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'AppCoder/assets/favicon.ico' %}" />
         <!-- Bootstrap Icons-->
@@ -18,43 +18,89 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'AppCoder/css/styles.css' %}" rel="stylesheet" />
     </head>
-    <body id="page-top">
+    <body id="page-top" style="background-image: url('/media/fondo/bg-masthead.jpg')">
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="{% url 'Ver Scores' %}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'Ver Wods' %}">Wods</a>
                 <a class="navbar-brand" href="{% url 'Ver Atletas' %}">Atletas</a>
-                <a class="navbar-brand" href="{% url 'Ver Movimientos' %}">Movimientos</a>  
+                <a class="navbar-brand" href="{% url 'Ver Movimientos' %}">Movimientos</a>
+                <a class="navbar-brand" href="{% url 'Ver Wods' %}">Wods</a>
+                <a class="navbar-brand" href="{% url 'Ver Competencias' %}">Competencias</a>
+
+                {% if request.user.is_authenticated %} 
+                
+                <li class="nav-item dropdown">
+                            {% with  request.user.avatarimagen_set.last as first_image %} 
+                            
+                            {% if first_image %}
+                            {{ request.user }}  
+                            <img class="rounded-circle" width ="60px" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdownPortfolio" src="{{first_image.imagen.url}}" href="{% url 'Cambiar Avatar' %}" alt="Datos de mi cuenta">
+                            {% else %}
+                            <img class="rounded-circle" width ="60px" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdownPortfolio" src="/media/avatarSinAvatar.jpg" href="{% url 'Cambiar Avatar' %}" alt="Datos de mi cuenta">
+                            {% endif %}
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+                                            
+                                <li><a  class="dropdown-item" href="{% url 'Cambiar Avatar' %}" > Cambiar Avatar  </a> </li> 
+                                {% with  request.user.atleta_set.last as atleta %}
+
+                                {% if atleta %}
+                                
+                                    <li><a class="dropdown-item disabled" > Atleta: {{ atleta.apellido}}, {{atleta.nombre}} </a> </li>
+                                    <li><a class="dropdown-item" href="{% url 'Editar Atleta' atleta.id %}"  > Editar mis Datos de Atleta </a> </li>
+                                    <li><a  class="dropdown-item" href="{% url 'Borrar Atleta' atleta.id %}"  > Borrar mis Datos de Atleta </a> </li> 
+                                {% else %}
+                                    <li><a  class="dropdown-item" href="{% url 'registro2' %}"  > Cargar mis Datos de Atleta </a> </li> 
+
+                                {% endif %}
+                                <li><a class="dropdown-item btn btn-primary btn-xl" href="{% url 'Log Out' %}">Cerrar Sesión</a>  </li> 
+                                {% endwith %}
+                                {% endwith %}
+                            
+                            </ul>
+                        </li>  
+            </div>
+                
+                {% else %}
+                <a class="btn btn-outline-primary btn-xl" href="{% url 'Log In' %}">Iniciar Sesión</a> 
+                <a class="btn btn-primary btn-xl" href="{% url 'Sign Up' %}">Registrarse</a> 
+                {% endif %}
+                
+
+
+                
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead">
-            <div class="container px-4 px-lg-5 h-100">
-                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">{% block titulo %}
+
+            
+        <section class="py-5" >
+            <div class="container px-5" >  
+                <!-- Contact form-->
+                <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                    <div class="text-center mb-5"> 
+                        <h1 class="fw-bolder">
+                            {% block titulo %}
                             
-                            {%endblock%}</h1>
-                        <hr class="divider" />
-                    </div>
-                    <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5">
+                            {%endblock%}
+                        </h1>
+                        <p class="lead fw-normal text-muted mb-0">
                             {% block botonera %}
                             
                             {%endblock%}</p>
-                        <p class="text-white-75 mb-5">
-                            {% block formulario %}
+                    </div> 
+                    <div> 
+                                    {% block formulario %}
                             
-                            {%endblock%}</p>
-                            
-                    </div>
+                                    {%endblock%}   
+                                </div>
                 </div>
-            </div>
-        </header>
+        </section>
+
+
         <!-- Footer-->
         <footer class="bg-light py-5">
-            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Python - Coderhouse &copy; 2023 - Matias Vega</div></div>
+            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Python - Coderhouse &copy; 2023 - <a href="{% url 'About' %}">Matias Vega</a></div></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

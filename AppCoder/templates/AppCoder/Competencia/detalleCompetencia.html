@@ -1,0 +1,37 @@
+{% extends "AppCoder/padre.html" %}
+
+
+
+{% block titulo %}
+<img class="rounded-circle mb-4 px-4" style="max-width: 300px;"  src="/media/{{ competencia.imagen }}" alt="..." />
+<br>
+{{ competencia.nombre}}
+{% endblock %}
+ 
+
+{% block formulario %}
+<table class="table">
+    <thead>
+      <tr>
+        <th> </th> 
+        <th>Atleta</th>
+        <th> Wod 1: {{ competencia.wod1.nombre }} </th> 
+        <th> Wod 2: {{ competencia.wod2.nombre }} </th> 
+        <th> Wod 3: {{ competencia.wod3.nombre }}</th> 
+        <th>Total</th> 
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in listaScores %} 
+          <td> <img class="rounded-circle mb-4 px-4" style="max-width: 100px;"  src="/media/{{ x.imagen }}" alt="..." /></td> 
+          <td> {{ x.atleta }}</td>
+          <td> {{ x.wod1 }}</td>
+          <td> {{ x.wod2 }}</td>
+          <td> {{ x.wod3 }}</td>
+          <td> {{ x.total }}</td>
+        </tr>    
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

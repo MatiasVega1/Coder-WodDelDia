@@ -1,0 +1,27 @@
+{% extends "AppCoder/padre.html" %}
+
+{% block titulo %}
+Listado de Atletas
+<a class="btn btn-primary btn-xl"  href="{% url 'Crear Atletas' %}">Registrarse</a> 
+{% endblock %}
+
+
+{% block formulario %}
+<form action="/AppCoder/verAtleta/" method="GET">
+    <input type="text" name = "apellido">
+    <input class="btn btn-primary btn-xl" type="submit" value="Buscar"> 
+</form>
+
+<p class="form-text">  Estos son nuestros últimos atletas registrados:  </p>   <br>
+
+{% for x in object_list %}
+    <p class="form-text">  
+        <img src="{{ x.avatar.imagen.url }}" alt="Imagen">  {{x}} 
+        <a  href="{% url 'Editar Atleta' x.id %}"  > Editar </a> 
+        <a  href="{% url 'Borrar Atleta' x.id %}"  > Borrar </a> 
+    </p>  
+    <br> 
+{% endfor %}
+
+{% endblock %}
+

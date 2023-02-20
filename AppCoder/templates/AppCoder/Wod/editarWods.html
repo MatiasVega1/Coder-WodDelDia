@@ -1,0 +1,44 @@
+{% extends "AppCoder/padre.html" %}
+ 
+
+{% load static %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+{% block titulo %}
+Registro de Wods 
+<script>
+    function showPopup() {
+        var popup = document.createElement("div");
+        cerrar = '"document.getElementById( ' + "'modal'" + ").style.display='none'" + '"'
+        popup.innerHTML = "<p>Recordá que los tipos de wods son:<br>TABATA (20'' de Trabajo por 10'' de descanso)<br>EMOM (máximas repeticiones por minuto)<br>FOR TIME (Completar repeticiones en el menor tiempo posible)<br>AMRAP (Todas las repetciones que se puedan hacer en el tiempo dado)</p> <button type='button' class='btn btn-secondary' onclick= " + cerrar +  " >X</button>";
+        popup.id = "modal"
+        popup.style.backgroundColor = "white";
+        popup.style.padding = "20px";
+        popup.style.position = "fixed";
+        popup.style.top = "50%";
+        popup.style.left = "50%";
+        popup.style.transform = "translate(-50%, -50%)";
+        popup.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+        document.body.appendChild(popup);
+      }
+</script>
+ 
+<button onclick="showPopup()" class="btn btn-secondary btn-xl" type="Submit">  
+    <span>?</span>
+</button> 
+
+{% endblock %} 
+
+{% block formulario %}
+<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    {{formulario1.as_p}}
+    
+    <input class="btn btn-primary btn-xl" type="Submit" value="Enviar">  
+</form>
+{% endblock %}
+
+
+
+
