@@ -2,7 +2,7 @@
 
 {% block titulo %}
 Listado de Competencias
-{% if request.user.is_authenticated %}
+{% if request.user.is_staff %}
 <a class="btn btn-primary btn-xl"  href="{% url 'Crear Competencias' %}">Crear</a> 
 {% endif %}
 {% endblock %}

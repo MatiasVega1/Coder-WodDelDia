@@ -4,14 +4,19 @@
 Registro de Competencias
 {% endblock %} 
 
+
 {% block formulario %}
+{% if request.user.is_staff %}
 <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 
     {{formulario1.as_p}}
     <input class="btn btn-primary btn-xl" type="Submit" value="Enviar">  
 </form>
+{% else %}
+Tienes que ser administrador para poder acceder
+
+{% endif %}
+
 {% endblock %}
-
-
 
 

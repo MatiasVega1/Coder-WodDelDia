@@ -3,7 +3,7 @@
 {% block titulo %}
 Listado de Wods
 
-{% if request.user.is_authenticated %}
+{% if request.user.is_staff %}
 <a class="btn btn-primary btn-xl"  href="{% url 'Crear Wod' %}">Crear</a> 
 {% endif %}
 {% endblock %}
@@ -29,8 +29,6 @@ Listado de Wods
 
 {% block formulario %} 
 
-
-
 <br>
 <p class="form-text"> Estos son los wods que se cargaron: </p> 
 <table class="table">
@@ -51,7 +49,7 @@ Listado de Wods
           <td>{{ x.tipo }}</td>
           <td>{{ x.duracion }}</td>
           <td> 
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_staff %}
             <a class="btn btn-outline-light btn-xl" href="{% url 'Editar Wod' x.nombre %}"  > &#128397  </a> 
             <a  class="btn btn-outline-light btn-xl" href="{% url 'Borrar Wod' x.nombre %}"  > &#10060 </a> 
             {% endif %}

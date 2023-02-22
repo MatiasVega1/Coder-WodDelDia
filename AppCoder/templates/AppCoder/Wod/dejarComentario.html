@@ -7,8 +7,7 @@
 
 
 {% block titulo %}
-Registro de Wods 
-
+Dejar comentario 
 {% endblock %} 
 
 {% block formulario %}
@@ -20,7 +19,6 @@ Registro de Wods
             <option value="{{ wod.pk }}">{{ wod.nombre }}</option>
         {% endfor %}
     </select>
-    
     
     {{form.as_p}}
     <input class="btn btn-primary btn-xl" type="Submit" value="Enviar">  

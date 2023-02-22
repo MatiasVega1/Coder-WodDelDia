@@ -1,21 +1,18 @@
 {% extends "AppCoder/padre.html" %}
 
-
-
 {% block titulo %}
 {{ wod.nombre}}
 {% endblock %}
 
 {% block botonera %} 
         <td> 
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_staff %}
             <a class="btn btn-outline-primary btn-xl" href="{% url 'Editar Wod' wod.nombre %}"  > Editar  </a> 
             <a  class="btn btn-outline-primary btn-xl" href="{% url 'Borrar Wod' wod.nombre %}"  > Eliminar </a> 
             {% endif %}
         </td>
-        <td> 
-            <a class="btn btn-primary btn-xl" href="{% url 'Score del Dia' wod.nombre %}"  > Cargar Score </a> 
-            <a  class="btn btn-primary btn-xl" href="{% url 'Dejar Comentario'  wod.nombre %}"  > Comentar </a>
+        <td>  
+            
         </td>
 
 
@@ -66,8 +63,10 @@
                 {{ wod.cantidad5}}
                 {{ wod.movimiento5.nombre}}  
                 <a  href="{% url 'Filtrar Movimiento'  wod.movimiento5.nombre %}"  > Ver </a>
-                {% endif %}
-                </p>  
+                {% endif %} 
+                <div class="d-grid"><a class="btn btn-primary" href="{% url 'Dejar Comentario'  wod.nombre %}" > Dejar Comentario</a></div>
+            
+            </p>  
             </div>
         </div>
     </div>
@@ -87,7 +86,7 @@
                 Aún no hay resultados cargados! A entrenar y cargar tus resultados!
                 {% endif %}
                 <br>
-                <div class="d-grid"><a class="btn btn-outline-primary"  href="{% url 'Score del Dia' wod.nombre %}" >Cargar Score</a></div>
+                <div class="d-grid"><a class="btn btn-primary"  href="{% url 'Score del Dia' wod.nombre %}" >Cargar Score</a></div>
             </div>
         </div>
     </div>

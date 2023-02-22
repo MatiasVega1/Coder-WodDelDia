@@ -3,13 +3,13 @@
 {% block titulo %}
 Movimientos
 
-{% if request.user.is_authenticated %}
+{% if request.user.is_staff %}
 <a class="btn btn-primary btn-xl"  href="{% url 'Crear Movimientos' %}">Crear</a> 
 {% endif %}
 {% endblock %}
 
 {% block botonera %}
-<form action="/AppCoder/filtrarMovimiento/" method="GET"> 
+<form action="/AppCoder/filtrarMovimiento/" id="formulario" method="GET"> 
     <label class="form-text">Dificultad: </label>
     <select name="dificultad" id="dificultad">  
         <option value="">Dificultad</option>
@@ -17,8 +17,8 @@ Movimientos
         <option value="Normal">Normal</option>
         <option value="Dificil">Dificil</option> 
     </select>
-    
-    <input class="btn btn-scondary btn-xl" type="submit" value="Buscar"> 
+     
+    <button class="btn btn-primary btn-xl" type="submit" id="enviar" disabled>Buscar</button>
 </form>
 {% endblock %}
 
@@ -49,5 +49,20 @@ Movimientos
         </div> 
     </div>
 </section>
+
+<script>
+    const formulario = document.getElementById('formulario');
+    const selectTipo = document.getElementById('dificultad');
+    const botonEnviar = document.getElementById('enviar');
+    
+    selectTipo.addEventListener('change', function() {
+      botonEnviar.disabled = !selectTipo.value;
+    });
+    
+    formulario.addEventListener('submit', function() {
+      botonEnviar.disabled = true;
+    });
+  
+  </script>
 
 {% endblock %}

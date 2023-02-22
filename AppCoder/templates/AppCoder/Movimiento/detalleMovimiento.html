@@ -14,8 +14,11 @@
                 <div class="col-lg-6">
                     <h2 class="fw-bolder"> {{movimiento.nombre}} 
                     {% if request.user.is_authenticated %}
+                        {% if request.user.is_staff %}
                         <a class="btn btn-outline-primary btn-xl" href="{% url 'Editar Movimiento' movimiento.nombre %}"  > Editar  </a> 
+                        
                         <a  class="btn btn-outline-primary btn-xl" href="{% url 'Borrar Movimiento' movimiento.id %}"  > Eliminar </a>  
+                        {% endif %}        
                     {% endif %}</h2>
                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{movimiento.dificultad.upper}}</div>
                     <p class="lead fw-normal text-muted mb-0">{{ movimiento.descripcion}} </p>  

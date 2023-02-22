@@ -62,7 +62,8 @@
                         </p> 
                         <div class="d-grid"><a class="btn btn-outline-primary"  href="{% url 'Filtrar Wod' wodDelDia.nombre %}" > Ver Wod </a></div> 
                         <br>
-                        <div class="d-grid"><a class="btn btn-primary"  href="{% url 'Score del Dia' wodDelDia.nombre %}" >Cargar Score</a></div> 
+                        <div class="d-grid"><a class="btn btn-primary" href="{% url 'Dejar Comentario'  wodDelDia.nombre %}" > Dejar Comentario</a></div>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -81,6 +82,10 @@
                         {% else %}
                         Aún no hay resultados cargados! A entrenar y cargar tus resultados!
                         {% endif %}
+                        
+                        <div class="d-grid"><a class="btn btn-primary"  href="{% url 'Score del Dia' wodDelDia.nombre %}" >Cargar Score</a></div> 
+                    
+                        
                         
                     </div>
                 </div>
