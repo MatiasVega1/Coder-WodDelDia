@@ -1,8 +1,7 @@
 {% extends "AppCoder/padre.html" %}
 
 {% block titulo %}
-Movimientos
-
+Listado de Competencias
 {% if request.user.is_authenticated %}
 <a class="btn btn-primary btn-xl"  href="{% url 'Crear Competencias' %}">Crear</a> 
 {% endif %}
@@ -16,7 +15,7 @@ Movimientos
 
 <section class="py-5">
     <div class="container px-5">
-        <h2 class="fw-bolder fs-5 mb-4">Todos nuestros movimientos:</h2>
+        <h2 class="fw-bolder fs-5 mb-4">Todas nuestras competencias:</h2>
         <div class="row gx-5">
             {% for x in listaMovimientos %}
             <div class="col-lg-4 mb-5">

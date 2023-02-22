@@ -1,9 +1,7 @@
 from django import forms
 from .models import *
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
-
 
 # Acá utilizo Form porque me interesa hacerlo tal cual se realizó en clases
 class AtletaFormulario(forms.ModelForm):   
@@ -18,17 +16,17 @@ class WodFormulario(forms.ModelForm):
         fields = ['nombre','tipo','duracion', 'rondas']
     cantidad1 = forms.IntegerField()
     movimiento1 = forms.ModelChoiceField(queryset=Movimiento.objects.all())
-    cantidad2 = forms.IntegerField()
-    movimiento2 = forms.ModelChoiceField(queryset=Movimiento.objects.all())
-    cantidad3 = forms.IntegerField()
-    movimiento3 = forms.ModelChoiceField(queryset=Movimiento.objects.all())
-    cantidad4 = forms.IntegerField()
-    movimiento4 = forms.ModelChoiceField(queryset=Movimiento.objects.all())
-    cantidad5 = forms.IntegerField()
-    movimiento5 = forms.ModelChoiceField(queryset=Movimiento.objects.all())
+    cantidad2 = forms.IntegerField(required=False )
+    movimiento2 = forms.ModelChoiceField(queryset=Movimiento.objects.all(), required=False)
+    cantidad3 = forms.IntegerField(required=False )
+    movimiento3 = forms.ModelChoiceField(queryset=Movimiento.objects.all(), required=False )
+    cantidad4 = forms.IntegerField(required=False )
+    movimiento4 = forms.ModelChoiceField(queryset=Movimiento.objects.all(), required=False )
+    cantidad5 = forms.IntegerField(required=False )
+    movimiento5 = forms.ModelChoiceField(queryset=Movimiento.objects.all(), required=False )
 
 class MovimientoFormulario(forms.ModelForm):
-    explicacion = forms.URLField(label='URL del enlace')
+    explicacion = forms.URLField(label='URL del enlace') 
     class Meta:
         model = Movimiento
         fields = ['nombre','descripcion', 'dificultad', 'imagen'] 
@@ -63,11 +61,10 @@ class AvatarImagenFormulario(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['imagen'].widget.attrs.update({'accept': 'image/*'})
 
-
 class ComentarioFormulario(forms.ModelForm):
     class Meta:
         model = Comentario
-        fields = ['comentario'] 
+        fields = ['titulo', 'comentario'] 
 
 class AdaptacionFormulario(forms.ModelForm):
     class Meta:

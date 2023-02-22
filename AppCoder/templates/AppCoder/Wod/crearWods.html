@@ -80,7 +80,7 @@ Registro de Wods
     </div> 
     
     <div class="row" > 
-        <div class="col-lg-6 col-xl-6">
+        <div class="col-lg-4 col-xl-4">
             <div class="form-floating mb-3"> 
                 <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.movimiento1.name }}">                
                     <option value="" selected disabled>Seleccione una opción</option>
@@ -91,98 +91,140 @@ Registro de Wods
             </div>
         </div>
         
-        <div class="col-lg-6 col-xl-6">
+        <div class="col-lg-4 col-xl-4">
             <div class="form-floating mb-3">
                 <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.cantidad1.name }}"/>  
                 <label for="name">Repetciones</label>
                 <div class="invalid-feedback" data-sb-feedback="name:required">La duración del wod es obligatorio</div>
             </div> 
         </div> 
+ 
+            <!-- botón "Agregar" -->
+            <div class="col-lg-4 col-xl-4"> 
+                <div class="form-floating mb-3">
+                <button  type="button"  class="btn btn-secondary btn-xl" id="add-optional-fields-2">Agregar Movimiento</button>
+                </div>
+            </div>
     </div> 
 
-    <div class="row" > 
-        <div class="col-lg-6 col-xl-6">
-            <div class="form-floating mb-3"> 
-                <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.movimiento2.name }}">                
-                    <option value="" selected disabled>Seleccione una opción</option>
-                    {% for option in formulario1.movimiento2.field.choices %}
-                        <option value="{{ option.0 }}">{{ option.1 }}</option>
-                    {% endfor %}
-                </select>  
+    <div  id="optional-fields-2" hidden>
+        <div class="row" > 
+            <div class="col-lg-4 col-xl-4">
+                <div class="form-floating mb-3"> 
+                    <select class="form-control" id="tipo"  name="{{ formulario1.movimiento2.name }}">                
+                        <option value="" selected disabled>Seleccione una opción</option>
+                        {% for option in formulario1.movimiento2.field.choices %}
+                            <option value="{{ option.0 }}">{{ option.1 }}</option>
+                        {% endfor %}
+                    </select>  
+                </div>
             </div>
-        </div>
-        
-        <div class="col-lg-6 col-xl-6">
-            <div class="form-floating mb-3">
-                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.cantidad2.name }}"/>  
-                <label for="name">Repetciones</label>
-                <div class="invalid-feedback" data-sb-feedback="name:required">La duración del wod es obligatorio</div>
+            
+            <div class="col-lg-4 col-xl-4">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="name" type="text" placeholder="Enter your name..."  name="{{ formulario1.cantidad2.name }}"/>  
+                    <label for="name">Repetciones</label> 
+                </div> 
             </div> 
-        </div> 
-    </div> 
 
-    <div class="row" > 
-        <div class="col-lg-6 col-xl-6">
-            <div class="form-floating mb-3"> 
-                <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.movimiento3.name }}">                
-                    <option value="" selected disabled>Seleccione una opción</option>
-                    {% for option in formulario1.movimiento3.field.choices %}
-                        <option value="{{ option.0 }}">{{ option.1 }}</option>
-                    {% endfor %}
-                </select>  
+            <!-- botón "Agregar" -->
+            <div class="col-lg-4 col-xl-4"> 
+                <div class="form-floating mb-3">
+                <button  type="button" class="btn btn-secondary btn-xl"  id="add-optional-fields-3">Agregar Movimiento</button>
+                </div>
             </div>
-        </div>
-        
-        <div class="col-lg-6 col-xl-6">
-            <div class="form-floating mb-3">
-                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.cantidad3.name }}"/>  
-                <label for="name">Repetciones</label>
-                <div class="invalid-feedback" data-sb-feedback="name:required">La duración del wod es obligatorio</div>
-            </div> 
         </div> 
-    </div> 
+
+        <div  id="optional-fields-3" hidden> 
+            <div class="row" > 
+                <div class="col-lg-4 col-xl-4">
+                    <div class="form-floating mb-3"> 
+                        <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.movimiento3.name }}">                
+                            <option value="" selected disabled>Seleccione una opción</option>
+                            {% for option in formulario1.movimiento3.field.choices %}
+                                <option value="{{ option.0 }}">{{ option.1 }}</option>
+                            {% endfor %}
+                        </select>  
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-xl-4">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.cantidad3.name }}"/>  
+                        <label for="name">Repetciones</label>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">La duración del wod es obligatorio</div>
+                    </div> 
+                </div> 
+                
+            <!-- botón "Agregar" -->
+            <div class="col-lg-4 col-xl-4"> 
+                <div class="form-floating mb-3">
+                <button  type="button"  class="btn btn-secondary btn-xl" id="add-optional-fields-4">Agregar Movimiento</button>
+                </div>
+            </div>
+
+            </div> 
+            
+            <div  id="optional-fields-4" hidden> 
+                <div class="row" > 
+                    <div class="col-lg-4 col-xl-4">
+                        <div class="form-floating mb-3"> 
+                            <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.movimiento4.name }}">                
+                                <option value="" selected disabled>Seleccione una opción</option>
+                                {% for option in formulario1.movimiento4.field.choices %}
+                                    <option value="{{ option.0 }}">{{ option.1 }}</option>
+                                {% endfor %}
+                            </select>  
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-xl-4">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.cantidad4.name }}"/>  
+                            <label for="name">Repetciones</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">La duración del wod es obligatorio</div>
+                        </div> 
+                    </div> 
+
+                    
+            <!-- botón "Agregar" -->
+            <div class="col-lg-4 col-xl-4"> 
+                <div class="form-floating mb-3">
+                <button  type="button"  class="btn btn-secondary btn-xl" id="add-optional-fields-5">Agregar Movimiento</button>
+                </div>
+            </div>
+
+
+                </div>
+            </div>
+            
+            <div  id="optional-fields-5" hidden> 
+                <div class="row" > 
+                    <div class="col-lg-4 col-xl-4">
+                        <div class="form-floating mb-3"> 
+                            <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.movimiento5.name }}">                
+                                <option value="" selected disabled>Seleccione una opción</option>
+                                {% for option in formulario1.movimiento5.field.choices %}
+                                    <option value="{{ option.0 }}">{{ option.1 }}</option>
+                                {% endfor %}
+                            </select>  
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-xl-4">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.cantidad5.name }}"/>  
+                            <label for="name">Repetciones</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">La duración del wod es obligatorio</div>
+                        </div> 
+                    </div> 
+
+                     
+                </div> 
+        </div>
+    </div>
+</div>
     
-    <div class="row" > 
-        <div class="col-lg-6 col-xl-6">
-            <div class="form-floating mb-3"> 
-                <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.movimiento4.name }}">                
-                    <option value="" selected disabled>Seleccione una opción</option>
-                    {% for option in formulario1.movimiento4.field.choices %}
-                        <option value="{{ option.0 }}">{{ option.1 }}</option>
-                    {% endfor %}
-                </select>  
-            </div>
-        </div>
-        
-        <div class="col-lg-6 col-xl-6">
-            <div class="form-floating mb-3">
-                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.cantidad4.name }}"/>  
-                <label for="name">Repetciones</label>
-                <div class="invalid-feedback" data-sb-feedback="name:required">La duración del wod es obligatorio</div>
-            </div> 
-        </div> 
-    </div> 
-    
-    <div class="row" > 
-        <div class="col-lg-6 col-xl-6">
-            <div class="form-floating mb-3"> 
-                <select class="form-control" id="tipo" data-sb-validations="required" name="{{ formulario1.movimiento5.name }}">                
-                    <option value="" selected disabled>Seleccione una opción</option>
-                    {% for option in formulario1.movimiento5.field.choices %}
-                        <option value="{{ option.0 }}">{{ option.1 }}</option>
-                    {% endfor %}
-                </select>  
-            </div>
-        </div>
-        
-        <div class="col-lg-6 col-xl-6">
-            <div class="form-floating mb-3">
-                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" name="{{ formulario1.cantidad5.name }}"/>  
-                <label for="name">Repetciones</label>
-                <div class="invalid-feedback" data-sb-feedback="name:required">La duración del wod es obligatorio</div>
-            </div> 
-        </div> 
-    </div> 
  
 
     
@@ -190,6 +232,45 @@ Registro de Wods
     <input class="btn btn-primary btn-xl" type="Submit" value="Enviar">  
 </form> 
 </div>
+
+<!-- colocar antes del cierre del cuerpo -->
+<script>
+    const addOptionalFieldsButton2 = document.getElementById('add-optional-fields-2');
+    const optionalFields2 = document.getElementById('optional-fields-2');
+  
+    addOptionalFieldsButton2.addEventListener('click', () => {
+      optionalFields2.hidden = !optionalFields2.hidden;
+    });
+</script>
+
+<!-- colocar antes del cierre del cuerpo -->
+<script>
+    const addOptionalFieldsButton3 = document.getElementById('add-optional-fields-3');
+    const optionalFields3 = document.getElementById('optional-fields-3');
+  
+    addOptionalFieldsButton3.addEventListener('click', () => {
+      optionalFields3.hidden = !optionalFields3.hidden;
+    });
+</script>
+<!-- colocar antes del cierre del cuerpo -->
+<script>
+    const addOptionalFieldsButton4 = document.getElementById('add-optional-fields-4');
+    const optionalFields4 = document.getElementById('optional-fields-4');
+  
+    addOptionalFieldsButton4.addEventListener('click', () => {
+      optionalFields4.hidden = !optionalFields4.hidden;
+    });
+</script>
+<!-- colocar antes del cierre del cuerpo -->
+<script>
+    const addOptionalFieldsButton5 = document.getElementById('add-optional-fields-5');
+    const optionalFields5 = document.getElementById('optional-fields-5');
+  
+    addOptionalFieldsButton5.addEventListener('click', () => {
+      optionalFields5.hidden = !optionalFields5.hidden;
+    });
+</script>
+
 {% endblock %}
 
 

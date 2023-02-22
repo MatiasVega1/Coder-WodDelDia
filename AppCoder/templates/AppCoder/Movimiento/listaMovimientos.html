@@ -9,10 +9,6 @@ Movimientos
 {% endblock %}
 
 {% block botonera %}
-{% endblock %}
-
-{% block formulario %}
-
 <form action="/AppCoder/filtrarMovimiento/" method="GET"> 
     <label class="form-text">Dificultad: </label>
     <select name="dificultad" id="dificultad">  
@@ -22,8 +18,12 @@ Movimientos
         <option value="Dificil">Dificil</option> 
     </select>
     
-    <input class="btn btn-primary btn-xl" type="submit" value="Buscar"> 
+    <input class="btn btn-scondary btn-xl" type="submit" value="Buscar"> 
 </form>
+{% endblock %}
+
+{% block formulario %}
+
 
 
 <section class="py-5">
@@ -33,7 +33,11 @@ Movimientos
             {% for x in listaMovimientos %}
             <div class="col-lg-4 mb-5">
                 <div class="card h-100 shadow border-0">
+                    {% if x.imagen %}
                     <img class="card-img-top" src="/media/{{x.imagen}}" alt="..." />
+                    {% else %}
+                    <img class="card-img-top" src="/media/avatarSinAvatar.jpg" alt="..." />
+                    {% endif %}
                     <div class="card-body p-4">
                         <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{x.dificultad.upper}}</div>
                         <a class="text-decoration-none link-dark stretched-link" href="{% url 'Filtrar Movimiento' x.nombre %}"><div class="h5 card-title mb-3">{{x.nombre}}</div></a>

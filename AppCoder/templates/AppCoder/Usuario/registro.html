@@ -3,10 +3,15 @@
 
 
 {% block titulo %}
-Registro
+Registro - Paso 1
 {% endblock %}
 
-{% block formulario %}
+{% block botonera %}
+Completar con los Datos de Usuario
+{% endblock %}
+
+{% block formulario %} 
+
 <form method= "POST"> {% csrf_token %}
     {{miFormulario.as_p}}
     <button type="submit">Sign up</button>

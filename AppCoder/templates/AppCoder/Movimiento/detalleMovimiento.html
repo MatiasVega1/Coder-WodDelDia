@@ -4,12 +4,18 @@
 
         <div class="container px-5 my-5">
             <div class="row gx-5 align-items-center">
-                <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="/media/{{ movimiento.imagen }}" alt="..." /></div>
+                
+                {% if movimiento.imagen %}
+                <img class="img-fluid rounded mb-5 mb-lg-0" style="max-width: 400px;" src="/media/{{movimiento.imagen}}" alt="..." />
+                {% else %}
+                <img class="img-fluid rounded mb-5 mb-lg-0" style="max-width: 400px;" src="/media/avatarSinAvatar.jpg" alt="..." />
+                {% endif %}
+ 
                 <div class="col-lg-6">
                     <h2 class="fw-bolder"> {{movimiento.nombre}} 
                     {% if request.user.is_authenticated %}
                         <a class="btn btn-outline-primary btn-xl" href="{% url 'Editar Movimiento' movimiento.nombre %}"  > Editar  </a> 
-                        <a  class="btn btn-outline-primary btn-xl" href="{% url 'Borrar Movimiento' movimiento.nombre %}"  > Eliminar </a>  
+                        <a  class="btn btn-outline-primary btn-xl" href="{% url 'Borrar Movimiento' movimiento.id %}"  > Eliminar </a>  
                     {% endif %}</h2>
                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{movimiento.dificultad.upper}}</div>
                     <p class="lead fw-normal text-muted mb-0">{{ movimiento.descripcion}} </p>  

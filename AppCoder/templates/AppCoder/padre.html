@@ -20,7 +20,7 @@
     </head>
     <body id="page-top" style="background-image: url('/media/fondo/bg-masthead.jpg')">
         <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="{% url 'Ver Scores' %}">Inicio</a>
                 <a class="navbar-brand" href="{% url 'Ver Atletas' %}">Atletas</a>
@@ -28,22 +28,19 @@
                 <a class="navbar-brand" href="{% url 'Ver Wods' %}">Wods</a>
                 <a class="navbar-brand" href="{% url 'Ver Competencias' %}">Competencias</a>
 
-                {% if request.user.is_authenticated %} 
-                
+                {% if request.user.is_authenticated %}                 
                 <li class="nav-item dropdown">
-                            {% with  request.user.avatarimagen_set.last as first_image %} 
-                            
+                            {% with  request.user.avatarimagen_set.last as first_image %}                             
+                            <a class="navbar-brand">  {{ request.user }}  </a>                             
                             {% if first_image %}
-                            {{ request.user }}  
-                            <img class="rounded-circle" width ="60px" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdownPortfolio" src="{{first_image.imagen.url}}" href="{% url 'Cambiar Avatar' %}" alt="Datos de mi cuenta">
+                                <img class="rounded-circle" width ="40px" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdownPortfolio" src="{{first_image.imagen.url}}" href="{% url 'Cambiar Avatar' %}" alt="Datos de mi cuenta">
                             {% else %}
-                            <img class="rounded-circle" width ="60px" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdownPortfolio" src="/media/avatarSinAvatar.jpg" href="{% url 'Cambiar Avatar' %}" alt="Datos de mi cuenta">
-                            {% endif %}
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                                            
+                                <img class="rounded-circle" width ="40px" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdownPortfolio" src="/media/avatarSinAvatar.jpg" href="{% url 'Cambiar Avatar' %}" alt="Datos de mi cuenta">
+                            {% endif %}  
+
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">              
                                 <li><a  class="dropdown-item" href="{% url 'Cambiar Avatar' %}" > Cambiar Avatar  </a> </li> 
                                 {% with  request.user.atleta_set.last as atleta %}
-
                                 {% if atleta %}
                                 
                                     <li><a class="dropdown-item disabled" > Atleta: {{ atleta.apellido}}, {{atleta.nombre}} </a> </li>
@@ -64,12 +61,7 @@
                 {% else %}
                 <a class="btn btn-outline-primary btn-xl" href="{% url 'Log In' %}">Iniciar Sesión</a> 
                 <a class="btn btn-primary btn-xl" href="{% url 'Sign Up' %}">Registrarse</a> 
-                {% endif %}
-                
-
-
-                
-            </div>
+                {% endif %}  
         </nav>
         <!-- Masthead-->
 

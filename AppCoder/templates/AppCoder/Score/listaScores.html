@@ -7,11 +7,16 @@
 
 <div class="container px-5 my-5">
     <div class="text-center mb-5">
-        <h1 class="fw-bolder">{% if request.user.is_autenticated %}
-            &#128075; Bienvenido
-            {% else %}
-            &#128075; Bienvenido {{ request.user }}
-            {% endif %}</h1>
+        <h1 class="fw-bolder"> 
+            {% with  request.user.atleta_set.last as atleta %}
+                {% if atleta %}
+                    &#128075; Bienvenido {{ atleta.apellido }}, {{ atleta.nombre }}
+                {% else %}
+                
+                    &#128075; Bienvenidos!
+                {% endif %}
+            {% endwith %} 
+        </h1>
     </div>
     <div class="row justify-content-center"> 
             
@@ -31,22 +36,30 @@
                         ( {{ wodDelDia.rondas}} rondas)
                         {% endif %}
                         <br>
-                        <p> {{ wodDelDia.cantidad1}}
-                            {{ wodDelDia.movimiento1.nombre}}
-                            <br>
-                        {{ wodDelDia.cantidad2}}
-                        {{ wodDelDia.movimiento2.nombre}}
+                        <p> 
+                        {{ wodDelDia.cantidad1}}
+                        {{ wodDelDia.movimiento1.nombre}}
                         <br>
-                        {{ wodDelDia.cantidad3}}
-                        {{ wodDelDia.movimiento3.nombre}}
+                        {% if wodDelDia.movimiento2 %}
+                            {{ wodDelDia.cantidad2}}
+                            {{ wodDelDia.movimiento2.nombre}}
+                        {% endif %}
                         <br>
-                        {{ wodDelDia.cantidad4}}
-                        {{ wodDelDia.movimiento4.nombre}}
+                        {% if wodDelDia.movimiento3 %}
+                            {{ wodDelDia.cantidad3}}
+                            {{ wodDelDia.movimiento3.nombre}}
+                        {% endif %}
                         <br>
-                        {{ wodDelDia.cantidad5}}
-                        {{ wodDelDia.movimiento5.nombre}} 
-                        <br></p> 
+                        {% if wodDelDia.movimiento4 %}
+                            {{ wodDelDia.cantidad4}}
+                            {{ wodDelDia.movimiento4.nombre}}
+                        {% endif %}
                         <br>
+                        {% if wodDelDia.movimiento5 %}
+                            {{ wodDelDia.cantidad5}}
+                            {{ wodDelDia.movimiento5.nombre}} 
+                        {% endif %} 
+                        </p> 
                         <div class="d-grid"><a class="btn btn-outline-primary"  href="{% url 'Filtrar Wod' wodDelDia.nombre %}" > Ver Wod </a></div> 
                         <br>
                         <div class="d-grid"><a class="btn btn-primary"  href="{% url 'Score del Dia' wodDelDia.nombre %}" >Cargar Score</a></div> 
@@ -56,7 +69,7 @@
             <div class="col-lg-6 col-xl-6">
                 <div class="card mb-5 mb-xl-0">
                     <div class="card-body p-50">
-                        <div class="small text-uppercase fw-bold text-muted">Los mejores resultados del día</div>
+                        <div class="small text-uppercase fw-bold text-muted">Los mejores</div>
                         {% if listaScores%}
                         <div class="mb-3">
                             <span class="display-4 fw-bold">Top Atletas</span> 

@@ -1,53 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User 
-from django import forms
-
-
-# Creación de diccionarios para dificultad y para tipos de wod
-# Podrían ser objetos pero a priori me interesaba probar con listas de valores predefinidos
-# En versiones futuras pasarán probablemente a ser objetos
-
-VARIABLES = [
-        ('facil', 'Facil'),
-        ('normal', 'Normal'),
-        ('dificil', 'Dificil'),
-    ]
-
-TIPOS = [
-        ('TABATA', 'TABATA'),
-        ('EMOM', 'EMOM'),
-        ('FOR TIME', 'FOR TIME'),
-        ('AMRAP', 'AMRAP'),
-    ]
-
-RONDAS = [
-        ('Sin Rondas', 'Sin Rondas'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
-        ('6', '6'),
-        ('7', '7'), 
-        ('8', '8'), 
-        ('9', '9'), 
-        ('10', '10'), 
-    ]
-
-NACIONALIDAD = [
-    ('ARG', 'Argentina'),
-    ('BRA', 'Brasil'),
-    ('COL', 'Colombia'),
-    ('VEN', 'Venezuela'),
-    ( 'PER', 'Perú'),
-    ('BOL', 'Bolivia'),
-    ('ECU', 'Ecuador'),
-    ('CHI', 'Chile'),
-    ( 'PAR', 'Paraguay'),
-    ('URU', 'Uruguay')
-
-]
-
+from django.db.models import Sum
+from AppCoder.constants import *
 
 class Box(models.Model): 
     nombre = models.CharField(max_length=300) 
@@ -60,38 +14,32 @@ class Atleta(models.Model):
     apellido= models.CharField(max_length=30) 
     edad = models.IntegerField()
     email = models.EmailField()
+    box = models.ForeignKey(Box, related_name='box', on_delete=models.CASCADE, blank=True, default= None)
 
-     # Encontre esta manera de hacer un campo de selección 
+    # Encontre esta manera de hacer un campo de selección 
     nacionalidad = models.CharField(
         max_length=10,
         choices= NACIONALIDAD,
         default='ARG',
     ) 
 
-    box = models.ForeignKey(Box, related_name='box', on_delete=models.CASCADE, blank=True, default= None)
-
-
     def __str__(self):
         return self.apellido + ', ' + self.nombre
 
-    def getNombre(self):
-        todosLosScores = Score.objects.filter(atleta=self)
-        score = 0 
-
-        for sco in todosLosScores:
-            score = score + sco.score
-        return score
+    def getScoreAtleta(self):
+        score = Score.objects.filter(atleta=self).aggregate(Sum('score'))['score__sum']
+        return score or 0
+    
+    def getAvatar(self):
+        avatar = AvatarImagen.objects.filter(usuario=self.usuario).first()
+        if avatar:
+            return avatar.imagen
+        else:
+            return "avatarSinAvatar.jpg"    
     
     def getScoreWod(self, wod):
-        todosLosScores = Score.objects.filter(atleta=self)
-        score = 0 
-
-        for sco in todosLosScores:
-            if (sco.wod == wod):
-                score = score + sco.score
-        return score
-    
-
+        score = Score.objects.filter(atleta=self, wod=wod).aggregate(Sum('score'))['score__sum']
+        return score or 0
 
 class Movimiento(models.Model):
     # Los movimientos son los que conforman el wod
@@ -108,11 +56,7 @@ class Movimiento(models.Model):
     )
 
     def __str__(self):
-        return self.nombre.upper() + ": " + self.descripcion
-
-    # Hago el método getNombre para que, en caso que lo necesite, pueda solo mostrar el movimiento sin su explicacion
-    def getNombre(self):
-        return self.nombre
+        return self.nombre.upper() + ": " + self.descripcion 
 
 class Adaptacion(models.Model):
     # Los movimientos son los que conforman el wod
@@ -121,35 +65,34 @@ class Adaptacion(models.Model):
     descripcion= models.CharField(max_length=1000)
     explicacion= models.CharField(max_length=200)
 
-
 class Wod(models.Model):
     # Un wod es la rutina que debe ejecutar nuestro atleta, está conformada de movimientos
     nombre = models.CharField(max_length=40)
+    duracion = models.IntegerField() 
  
     tipo = models.CharField(
         max_length=10,
         choices= TIPOS,
         default='TABATA',
-    ) 
-
-    duracion = models.IntegerField() 
-
-     # Encontre esta manera de hacer un campo de selección 
+    )  
+    
+    # Encontre esta manera de hacer un campo de selección 
     rondas = models.CharField(
         max_length=10,
         choices= RONDAS,
         default='Sin Rondas',
     )
+    
     cantidad1 = models.IntegerField(blank=True, default=0)
     movimiento1 = models.ForeignKey(Movimiento, related_name='movimientos1', on_delete=models.CASCADE, blank=True, default= None)
-    cantidad2 = models.IntegerField(blank=True, default=0)
-    movimiento2 = models.ForeignKey(Movimiento, related_name='movimientos2', on_delete=models.CASCADE, blank=True, default= None)
-    cantidad3 = models.IntegerField(blank=True, default=0)
-    movimiento3 = models.ForeignKey(Movimiento, related_name='movimientos3', on_delete=models.CASCADE, blank=True, default= None)
-    cantidad4 = models.IntegerField(blank=True, default=0)
-    movimiento4 = models.ForeignKey(Movimiento, related_name='movimientos4', on_delete=models.CASCADE, blank=True, default= None)
-    cantidad5 = models.IntegerField(blank=True, default=0)
-    movimiento5 = models.ForeignKey(Movimiento, related_name='movimientos5', on_delete=models.CASCADE, blank=True, default= None)
+    cantidad2 = models.IntegerField(null=True, blank=True, default=0)
+    movimiento2 = models.ForeignKey(Movimiento, related_name='movimientos2', on_delete=models.CASCADE, null=True, blank=True, default= None)
+    cantidad3 = models.IntegerField(blank=True, null=True, default=0)
+    movimiento3 = models.ForeignKey(Movimiento, related_name='movimientos3', on_delete=models.CASCADE, null=True, blank=True, default= None)
+    cantidad4 = models.IntegerField(blank=True, null=True, default=0)
+    movimiento4 = models.ForeignKey(Movimiento, related_name='movimientos4', on_delete=models.CASCADE, null=True, blank=True, default= None)
+    cantidad5 = models.IntegerField(blank=True, null=True, default=0)
+    movimiento5 = models.ForeignKey(Movimiento, related_name='movimientos5', on_delete=models.CASCADE, null=True, blank=True, default= None)
 
     def __str__(self):
         return self.nombre.upper() + " (" + self.tipo + " " + str(self.duracion) + " min)"

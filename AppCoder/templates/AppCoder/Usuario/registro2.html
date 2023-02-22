@@ -2,18 +2,37 @@
 
 
 
+
 {% block titulo %}
-Registro2
+Registro - Paso 2
 {% endblock %}
 
-{% block formulario %}
+{% block botonera %}
+Completar con los Datos de Atleta
+{% endblock %}
+
+{% block formulario %} 
 
 <form method= "POST"> {% csrf_token %}
-    
-    <input id="id_nombre" for="id_nombre" value="{{ request.user.first_name }}" name ="{{ miFormularioAtleta.nombre.name }}" readonly/>
-    <input id="id_apellido" for="id_apellido"   value="{{ request.user.last_name }}" name ="{{ miFormularioAtleta.apellido.name }}" readonly/>
-    <input id="id_email" for="id_email"   value="{{ request.user.email }}" name ="{{ miFormularioAtleta.email.name }}" readonly/>
-    
+    <div class="row"> 
+        
+        <div class="col-lg-4 col-xl-4">
+            <div class="form-floating mb-3">
+                <input  class="form-control" id="id_nombre" for="id_nombre" type="text" value="{{ request.user.first_name }}" name ="{{ miFormularioAtleta.nombre.name }}" readonly/>
+            </div>
+        </div>    
+        <div class="col-lg-4 col-xl-4">
+            <div class="form-floating mb-3">
+                <input class="form-control" id="id_apellido" for="id_apellido"   value="{{ request.user.last_name }}" name ="{{ miFormularioAtleta.apellido.name }}" readonly/>
+            </div>
+        </div>    
+        <div class="col-lg-4 col-xl-4">
+            <div class="form-floating mb-3">
+                <input class="form-control" id="id_email" for="id_email"   value="{{ request.user.email }}" name ="{{ miFormularioAtleta.email.name }}" readonly/>
+            </div>
+        </div>    
+    </div>
+
     <div> 
         <div class="form-floating mb-3">
             <input class="form-control" id="name" type="number" placeholder="Enter your name..." data-sb-validations="required" name="{{ miFormularioAtleta.edad.name }}"/>  
@@ -26,7 +45,7 @@ Registro2
 
     <div class="form-floating mb-3"> 
         <select class="form-control" id="tipo" data-sb-validations="required" name="{{ miFormularioAtleta.box.name }}">                
-            <option value="" selected disabled>Seleccione una opción</option>
+            <option value="" selected disabled>Seleccione su box</option>
             {% for option in boxes %}
                 <option value="{{ option.id }}"> {{ option.nombre }}</option>
             {% endfor %}
@@ -35,7 +54,7 @@ Registro2
 
     <div class="form-floating mb-3"> 
         <select class="form-control" id="tipo" data-sb-validations="required" name="{{ miFormularioAtleta.nacionalidad.name }}">                
-            <option value="" selected disabled>Seleccione una opción</option>
+            <option value="" selected disabled>Seleccione su nacionalidad</option>
             {% for option in nacionalidades   %}
                 <option value="{{ option.0 }}">{{ option.1 }}</option>
             {% endfor %}

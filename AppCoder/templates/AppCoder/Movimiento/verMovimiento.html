@@ -1,8 +1,6 @@
-{% extends "AppCoder/listaMovimientos.html" %}
+{% extends "AppCoder/Movimiento/listaMovimientos.html" %}
 
-{% block formulario %}    
-
-
+{% block botonera %}
 <form href="{% url 'Filtrar Movimiento Dificultad' %}" method="GET"> 
     <label class="form-text">Dificultad: </label>
     <select name="dificultad" id="dificultad">  
@@ -17,7 +15,15 @@
     <a class="btn btn-secondary btn-xl"  href="{% url 'Ver Movimientos' %}">Limpiar</a> 
 </form>
 
-<p class="form-text"> Los movimientos con dificultad {{dificultad}} son: </p>   <br>      
+{%endblock%}
+
+
+
+{% block formulario %}    
+
+
+
+<p class="form-text"> Los movimientos con dificultad {{dificultad}} son: </p>  
 
 <section class="py-5">
     <div class="container px-5">
@@ -25,8 +31,12 @@
         <div class="row gx-5">
             {% for x in movimientos %}
             <div class="col-lg-4 mb-5">
-                <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="/media/{{x.imagen}}" alt="..." />
+                    <div class="card h-100 shadow border-0">
+                        {% if x.imagen %}
+                        <img class="card-img-top" src="/media/{{x.imagen}}" alt="..." />
+                        {% else %}
+                        <img class="card-img-top" src="/media/avatarSinAvatar.jpg" alt="..." />
+                        {% endif %}
                     <div class="card-body p-4">
                         <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{x.dificultad.upper}}</div>
                         <a class="text-decoration-none link-dark stretched-link"  href="{% url 'Filtrar Movimiento' x.nombre %}"><div class="h5 card-title mb-3">{{x.nombre}}</div></a>

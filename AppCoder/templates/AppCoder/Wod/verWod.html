@@ -1,8 +1,8 @@
-{% extends "AppCoder/listaWods.html" %}
+{% extends "AppCoder/Wod/listaWods.html" %}
 
 {% block botonera %}
 
-<form href="{% url 'Filtrar Wod Tipo' %}" method="GET"> 
+<form href="{% url 'Filtrar Wod Tipo' %}" id="formulario" method="GET"> 
     <label class="form-text">Tipo: </label>
     <select name="tipo" id="tipo"> 
         <option value="">Tipo</option>
@@ -11,9 +11,9 @@
         <option value="FOR TIME">FOR TIME</option>
         <option value="AMRAP">AMRAP</option>
     </select>
-    
-    <input class="btn btn-primary btn-xl" type="submit" value="Buscar">
-    
+     
+    <button class="btn btn-primary btn-xl" type="submit" id="enviar" disabled>Buscar</button>
+
     <a class="btn btn-secondary btn-xl"  href="{% url 'Ver Wods' %}">Limpiar</a> 
 </form>
 
@@ -55,5 +55,21 @@
       {% endfor %}
     </tbody>
   </table> 
+
+  
+<script>
+  const formulario = document.getElementById('formulario');
+  const selectTipo = document.getElementById('tipo');
+  const botonEnviar = document.getElementById('enviar');
+  
+  selectTipo.addEventListener('change', function() {
+    botonEnviar.disabled = !selectTipo.value;
+  });
+  
+  formulario.addEventListener('submit', function() {
+    botonEnviar.disabled = true;
+  });
+
+</script>
 
 {%endblock%}

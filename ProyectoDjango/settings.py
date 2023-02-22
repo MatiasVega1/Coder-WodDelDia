@@ -129,3 +129,6 @@ LOGIN_URL = "/AppCoder/login"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media") # Carpeta Raiz de las imagenes 
+
+AVATAR_DEFAULT_IMAGE = 'avatarSinAvatar.jpg'
+
