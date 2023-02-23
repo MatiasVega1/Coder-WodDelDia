@@ -1,7 +1,7 @@
 {% extends "AppCoder/Wod/listaWods.html" %}
 
 {% block botonera %}
-
+<div class="container px-5 col-lg-4" >   
 <form href="{% url 'Filtrar Wod Tipo' %}" id="formulario" method="GET"> 
     <label class="form-text">Tipo: </label>
     <select name="tipo" id="tipo"> 
@@ -13,10 +13,10 @@
     </select>
      
     <button class="btn btn-primary btn-xl" type="submit" id="enviar" disabled>Buscar</button>
-
+    <br>
     <a class="btn btn-secondary btn-xl"  href="{% url 'Ver Wods' %}">Limpiar</a> 
 </form>
-
+</div>
 {% endblock %}
 
 {% block formulario %}    
@@ -31,7 +31,9 @@
         <th>Tipo</th>
         <th>Duración</th>
         <th> </th>
+        {% if request.user.is_autenticated %}
         <th>Acciones</th>
+        {% endif %}
       </tr>
     </thead>
     <tbody>
@@ -48,8 +50,10 @@
             {% endif %}
             </td>
           <td> 
+            {% if request.user.is_autenticated %}
             <a class="btn btn-primary btn-xl" href="{% url 'Score del Dia' x.nombre %}"  > Cargar Score </a> 
             <a  class="btn btn-primary btn-xl" href="{% url 'Dejar Comentario'  x.nombre %}"  > Comentar </a>
+            {% endif %}
           </td>
         </tr>
       {% endfor %}

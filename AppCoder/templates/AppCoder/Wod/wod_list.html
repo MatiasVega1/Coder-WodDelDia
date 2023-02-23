@@ -36,8 +36,10 @@ Querés cargar tus scores? <a  href="{% url 'Crear Score' %}"> Podés hacerlo ac
 <br>
 {% for x in listaWods %}
     <p class="form-text">  {{x}} 
-        <a  href="{% url 'Editar Wod' x.nombre %}"  > Editar </a> 
-        <a  href="{% url 'Borrar Wod' x.nombre %}"  > Borrar </a> 
+        {% if request.user.is_autenticated %}
+            <a  href="{% url 'Editar Wod' x.nombre %}"  > Editar </a> 
+            <a  href="{% url 'Borrar Wod' x.nombre %}"  > Borrar </a> 
+        {% endif %}
     </p>   
 {% endfor %}
 

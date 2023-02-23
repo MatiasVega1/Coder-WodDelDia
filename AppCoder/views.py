@@ -31,7 +31,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 # Página de inicio para ver siempre que se ingresa a la web
 def inicio(request):
-    return render(request, "AppCoder/inicio.html")
+    mensaje = "Bienvenido"
+    return render(request, "AppCoder/inicio.html", {"mensaje": mensaje})
 
 # Vista de página About
 def about(request):
@@ -86,8 +87,8 @@ def registro2(request):
             atl1.save() 
  
             listaAtletas = Atleta.objects.all() 
-            
-            return render(request, "AppCoder/inicio.html", {"listaAtletas": listaAtletas})
+            mensaje = "Listado de Atletas"
+            return render(request, "AppCoder/inicio.html", {"listaAtletas": listaAtletas, "mensaje": mensaje})
 
     else: 
         miFormularioAtleta = AtletaFormulario()
@@ -134,7 +135,8 @@ def upload_avatar(request):
                                 imagen = infoDic["imagen"] )
 
             ava1.save()
-            return render(request, "AppCoder/inicio.html")
+            mensaje = "Se guardó correctamente el avatar"
+            return render(request, "AppCoder/inicio.html", {"mensaje": mensaje})
     else:
         form = AvatarImagenFormulario()
     return render(request, 'AppCoder/Usuario/cambiarAvatar.html', {'form': form})
@@ -209,7 +211,8 @@ def borrarWod(request, wod_nombre):
     wodBorrar = Wod.objects.get(nombre = wod_nombre)
     wodBorrar.delete()
 
-    return render(request, "AppCoder/inicio.html")
+    mensaje = "Se eliminó el wod"
+    return render(request, "AppCoder/inicio.html", {"mensaje": mensaje})
 
 # Editar wod
 @staff_member_required
@@ -228,7 +231,9 @@ def editarWod(request, wod_nombre):
 
             wodEditar.save()
 
-            return render(request, "AppCoder/inicio.html")
+            mensaje = "Se editó el wod"
+
+            return render(request, "AppCoder/inicio.html", {"mensaje": mensaje})
     else:
         miFormulario = WodFormulario(initial={  "nombre": wodEditar.nombre, 
                                                 "tipo": wodEditar.tipo, 
@@ -266,7 +271,8 @@ def dejar_comentario(request, wod_nombre):
                                         comentario = infoDic["comentario"],
                                         titulo = infoDic["titulo"])
             comentario1.save()
-            return render(request, "AppCoder/inicio.html")
+            mensaje = "Se dejó un comentario"
+            return render(request, "AppCoder/inicio.html", {"mensaje": mensaje})
     else:
         form = ComentarioFormulario()
     return render(request, 'AppCoder/Wod/dejarComentario.html', {'form': form , "wods": wodCargarScore})
@@ -350,8 +356,8 @@ def editarMovimiento(request, movimiento_nombre):
             movEditar.imagen = infoDic["imagen"]
  
             movEditar.save()  
-
-            return render(request, "AppCoder/inicio.html")
+            mensaje = "Se editó el movimiento"
+            return render(request, "AppCoder/inicio.html", {"mensaje": mensaje})
     else:
         miFormulario = MovimientoFormulario(initial={  "nombre": movEditar.nombre, 
                                                 "descripcion": movEditar.descripcion, 
@@ -379,7 +385,8 @@ def cargarAdaptacionMovimiento(request, movimiento_nombre):
                                         descripcion = infoDic["descripcion"],
                                         explicacion = infoDic["explicacion"] ) 
             adaptacion1.save()
-            return render(request, "AppCoder/inicio.html")
+            mensaje = "Se agregó una adaptación"
+            return render(request, "AppCoder/inicio.html", {"mensaje": mensaje})
     else:
         form = AdaptacionFormulario()
     return render(request, 'AppCoder/Wod/dejarComentario.html', {'form': form , "wods": wodCargarScore})
@@ -460,7 +467,8 @@ def cargarScoreDelDia(request, wod_nombre):
           
         sco1.save() 
          
-        return render(request, "AppCoder/inicio.html")
+        mensaje = "Se agregó un nuevo score"
+        return render(request, "AppCoder/inicio.html", {"mensaje": mensaje})
     else:
         miFormulario = ScoreFormulario()
 

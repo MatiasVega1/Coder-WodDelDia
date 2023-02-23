@@ -2,19 +2,14 @@
 
 {% block titulo %}
 
-<header class="bg-dark py-5">
-    <div class="container px-5"0>
-        <div class="row gx-5 align-items-center justify-content-center">
-            <div class="col-lg-8 col-xl-7 col-xxl-6">
-                <div class="my-5 text-0.center text-xl-start">
-                    <h1 class="display-5 fw-bolder text-white mb-2">
-                        {{ mensaje }} </h1> 
-                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'Ver Scores' %}">Ir al Inicio</a> 
-                    </div>
-                </div>
-            </div> 
-        </div>
+<header class="bg-dark py-5"> 
+    <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6"> 
+                    <h1 class="display-5 fw-bolder text-white mb-2"> 
+                        {{ mensaje }}  
+                    </h1> 
+                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'Ver Scores' %}">Ir al Inicio</a> 
+             </div>
     </div>
 </header>
  

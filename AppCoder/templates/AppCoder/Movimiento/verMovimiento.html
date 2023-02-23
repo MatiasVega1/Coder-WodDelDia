@@ -1,6 +1,7 @@
 {% extends "AppCoder/Movimiento/listaMovimientos.html" %}
 
 {% block botonera %}
+<div class="container px-5 col-lg-4" >   
 <form href="{% url 'Filtrar Movimiento Dificultad' %}" id="formulario" method="GET"> 
     <label class="form-text">Dificultad: </label>
     <select name="dificultad" id="dificultad">  
@@ -9,12 +10,12 @@
         <option value="Normal">Normal</option>
         <option value="Dificil">Dificil</option> 
     </select>
-     
+     <br>
     <button class="btn btn-primary btn-xl" type="submit" id="enviar" disabled>Buscar</button>
 
     <a class="btn btn-secondary btn-xl"  href="{% url 'Ver Movimientos' %}">Limpiar</a> 
 </form>
-
+</div>
 {%endblock%}
 
 

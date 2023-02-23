@@ -9,7 +9,8 @@ Listado de Wods
 {% endblock %}
 
 {% block botonera %}
-<div> 
+
+<div class="container px-5 col-lg-4" >   
   <form action="/AppCoder/filtrarWod/" id="formulario" method="GET"> 
       <label class="form-text">Tipo: </label>
       <select name="tipo" id="tipo" >  
@@ -19,11 +20,11 @@ Listado de Wods
           <option value="FOR TIME">FOR TIME</option>
           <option value="AMRAP">AMRAP</option>
       </select>
-      
+      <br>
       <button class="btn btn-primary btn-xl" type="submit" id="enviar" disabled>Buscar</button>
     
   </form>
-  </div>
+</div>
 
 {% endblock %}
 
@@ -38,7 +39,9 @@ Listado de Wods
         <th>Tipo</th>
         <th>Duración</th>
         <th> </th>
+        {% if request.user.is_autenticated %}
         <th>Acciones</th>
+        {% endif %}
       </tr>
     </thead>
     <tbody>
@@ -55,8 +58,10 @@ Listado de Wods
             {% endif %}
             </td>
           <td> 
+            {% if request.user.is_autenticated %}
             <a class="btn btn-primary btn-xl" href="{% url 'Score del Dia' x.nombre %}"  > Cargar Score </a> 
             <a  class="btn btn-primary btn-xl" href="{% url 'Dejar Comentario'  x.nombre %}"  > Comentar </a>
+            {% endif %}
           </td>
         </tr>
       {% endfor %}
